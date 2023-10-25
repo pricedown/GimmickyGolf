@@ -1,0 +1,54 @@
+{
+    "name": "GolfBallInput",
+    "maps": [
+        {
+            "name": "Golf Ball",
+            "id": "7a57d2c3-7b11-451f-bfbf-ef2286226739",
+            "actions": [
+                {
+                    "name": "MouseLocation",
+                    "type": "Value",
+                    "id": "aa5f7474-abca-443c-929c-6687ebd8ec83",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "aa193b3c-0138-4fbf-bde3-0c8e874fd4b8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8eb56363-7c50-4315-9312-c5260c9027fd",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseLocation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "79ff2e75-6457-4f54-8838-fe26729fc6fc",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
