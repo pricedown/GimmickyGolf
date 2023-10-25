@@ -133,19 +133,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1001598908014745914, guid: d9c5dc411fbca714d8c9588eab50d154, type: 3}
       propertyPath: m_LinearDrag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1001598908014745914, guid: d9c5dc411fbca714d8c9588eab50d154, type: 3}
-      propertyPath: m_Constraints
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4106857796016179421, guid: d9c5dc411fbca714d8c9588eab50d154, type: 3}
       propertyPath: maxPower
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 4106857796016179421, guid: d9c5dc411fbca714d8c9588eab50d154, type: 3}
-      propertyPath: powerMultiplier
-      value: 1000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 4285229042379576299, guid: d9c5dc411fbca714d8c9588eab50d154, type: 3}
       propertyPath: m_LocalPosition.x
