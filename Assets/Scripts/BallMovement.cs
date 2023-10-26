@@ -5,15 +5,22 @@ using UnityEngine.InputSystem;
 
 public class BallMovement : MonoBehaviour
 {
-    public Vector2 relativeMousePos, storedPos, mousePos, screenSize;
-    public float maxPower, powerMultiplier, power;
-    private Rigidbody2D rb;
+    // maximum force that can be applied to the ball in a swing, 0 means uncapped
+    public float maxPower; 
+    
+    // draw weight constant of the "bow" that flings the ball
+    public float drawForce; 
+    
+    [Header("Runtime")]
     public bool isClicked = false;
+    public Vector2 relativeMousePos, storedPos, mousePos, screenSize;
+    public float power;
+    private Rigidbody2D rb;
 
     private void Start()
     {
-        screenSize = new Vector2(Screen.width, Screen.height);
         rb = GetComponent<Rigidbody2D>();
+        screenSize = new Vector2(Screen.width, Screen.height);
     }
 
     public void MousePosition(InputAction.CallbackContext context)
@@ -24,21 +31,27 @@ public class BallMovement : MonoBehaviour
 
     public void Click(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed) // on click
         {
-            isClicked = true;
             storedPos = relativeMousePos;
+            isClicked = true;
         }
-        if(context.canceled)
+        if (context.canceled) // on release
         {
-            power = Mathf.Clamp((relativeMousePos - storedPos).sqrMagnitude * powerMultiplier, 0, maxPower);
-            Vector2 shotDirection = (storedPos - relativeMousePos).normalized;
-            Shoot(power, shotDirection);
+            Vector2 drawback = relativeMousePos - storedPos;
+            Shoot(drawback);
             isClicked = false;
         }
     }
-    public void Shoot(float power, Vector2 direction)
+    public void Shoot(Vector2 drawback)
     {
-        rb.AddForce(direction * power);
+        Vector2 shotDirection = -drawback.normalized; // reverse direction (bow physics)
+        power = drawForce * drawback.magnitude; // F = draw force constant * draw length
+
+        // clamp 
+        power = Mathf.Max(power, 0);
+        if (maxPower > 0) power = Mathf.Min(power, maxPower);
+        
+        rb.AddForce(power * shotDirection);
     }
 }
