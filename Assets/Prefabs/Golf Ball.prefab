@@ -114,7 +114,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!58 &2881323627202730304
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -124,7 +124,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 5960602035405886146}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a569d70adafb41d4980a52458f5894ff, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
   storedPos: {x: 0, y: 0}
   mousePos: {x: 0, y: 0}
   screenSize: {x: 0, y: 0}
-  maxPower: 5000
+  maxPower: 500
   powerMultiplier: 1000
   power: 0
   isClicked: 0
