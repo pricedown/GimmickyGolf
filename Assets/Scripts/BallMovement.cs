@@ -49,8 +49,9 @@ public class BallMovement : MonoBehaviour
         power = drawForce * drawback.magnitude; // F = draw force constant * draw length
 
         // clamp 
-        power = Mathf.Max(power, 0);
-        if (maxPower > 0) power = Mathf.Min(power, maxPower);
+        power = Mathf.Clamp(power, 0, maxPower);
+        /*power = Mathf.Max(power, 0);
+        if (maxPower > 0) power = Mathf.Min(power, maxPower);*/
         
         rb.AddForce(power * shotDirection);
     }
