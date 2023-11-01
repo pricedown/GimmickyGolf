@@ -17,12 +17,18 @@ public class BallMovement : MonoBehaviour
     public bool isClicked = false;
     public Vector2 relativeMousePos, storedPos, mousePos, screenSize;
     public float power;
+    public bool still;
     private Rigidbody2D rb;
+    public GameObject cursorIndicatorPrefab;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         screenSize = new Vector2(Screen.width, Screen.height);
+    }
+    private void FixedUpdate()
+    {
+        if (rb.velocity.magnitude <= 0.1f) still = true; else still = false;
     }
 
     public void MousePosition(InputAction.CallbackContext context)
@@ -47,13 +53,16 @@ public class BallMovement : MonoBehaviour
     }
     public void Shoot(Vector2 drawback)
     {
-        Vector2 shotDirection = -drawback.normalized; // reverse direction (bow physics)
-        power = drawForce * drawback.magnitude; // F = draw force constant * draw length
+        if (still)
+        {
+            Vector2 shotDirection = -drawback.normalized; // reverse direction (bow physics)
+            power = drawForce * drawback.magnitude; // F = draw force constant * draw length
 
-        // clamp 
-        power = Mathf.Max(power, 0);
-        if (maxPower > 0) power = Mathf.Min(power, maxPower);
-        
-        rb.AddForce(power * shotDirection);
+            // clamp 
+            power = Mathf.Max(power, 0);
+            if (maxPower > 0) power = Mathf.Min(power, maxPower);
+
+            rb.AddForce(power * shotDirection);
+        }
     }
 }
