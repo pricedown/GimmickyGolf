@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.XR;
 
 public class BallMovement : MonoBehaviour
 {
@@ -13,11 +12,18 @@ public class BallMovement : MonoBehaviour
     // draw weight of the "bow" that flings the ball
     public float drawForce; 
     
+    // trajectory indicator
+    // duration: simulated foresight
+    // step: roughness of simulation
+    public float indicatorDuration = 5f, indicatorStep = 0.1f;
+    
     [Header("Runtime")]
+
+    public LineRenderer pullbackIndicator, trajectoryIndicator;
+    public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection;
+    public float power;
     public bool isClicked = false, still, glued = false;
-    public LineRenderer pullbackIndicator;
-    public Vector2 relativeMousePos, storedPos, mousePos, screenSize;
-    public float power, glueCD = 0  ;
+    public float portalCD, glueCD = 0;
     private Rigidbody2D rb;
     public GameObject cursorIndicatorPrefab;
     public Camera cam;
@@ -27,22 +33,37 @@ public class BallMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         cam = Camera.main;
         pullbackIndicator = GameObject.Find("Pullback").GetComponent<LineRenderer>();
+        trajectoryIndicator = GameObject.Find("Trajectory").GetComponent<LineRenderer>();
         screenSize = new Vector2(Screen.width, Screen.height);
     }
     private void FixedUpdate()
     {
-        if (glued)
-        {
-            rb.velocity = Vector2.zero;
-            rb.isKinematic = true;
-        } else if(glueCD > 0)
-        {
-            glueCD -= Time.deltaTime;
-        }
+        if(portalCD > 0)
+            portalCD -= Time.deltaTime;
+
         still = (rb.velocity.magnitude <= 0.05f);
-        
-        pullbackIndicator.SetPositions(PullbackLine());
-        pullbackIndicator.enabled = isClicked && still;
+
+
+        if (still)
+        {
+            if (glued) glueCD = 0.1f;
+            glued = false;
+            rb.isKinematic = false;
+            if (isClicked)
+            {
+                // Set up for a Stroke
+                Vector2 drawback = relativeMousePos - storedPos;
+                UpdateShot(drawback);
+
+                pullbackIndicator.enabled = true;
+                trajectoryIndicator.enabled = true;
+                pullbackIndicator.SetPositions(PullbackLine());
+                trajectoryIndicator.SetPositions(TrajectoryLine());
+            }
+        } else {
+            pullbackIndicator.enabled = false;
+            //trajectoryIndicator.enabled = false;
+        }
     }
 
     public void MousePosition(InputAction.CallbackContext context)
@@ -61,30 +82,19 @@ public class BallMovement : MonoBehaviour
         if (context.canceled) // on release
         {
             isClicked = false;
-            if (still)
-            {
-                Vector2 drawback = relativeMousePos - storedPos;
-                Shoot(drawback);
-            }
+            if (still) // TODO: add cancelling of action
+                rb.AddForce(power * shotDirection);
         }
     }
     
-    public void Shoot(Vector2 drawback)
+    public void UpdateShot(Vector2 drawback)
     {
-        if (still)
-        {
-            if (glued) glueCD = 0.1f;
-            glued = false;
-            rb.isKinematic = false;
-            Vector2 shotDirection = -drawback.normalized; // reverse direction (bow physics)
-            power = drawForce * drawback.magnitude; // F = draw force constant * draw length
+        shotDirection = -drawback.normalized; // reverse direction (bow physics)
+        power = drawForce * drawback.magnitude; // F = draw force constant * draw length
 
-            // clamp 
-            power = Mathf.Max(power, 0);
-            if (maxPower > 0) power = Mathf.Min(power, maxPower);
-
-            rb.AddForce(power * shotDirection);
-        }
+        // clamp 
+        power = Mathf.Max(power, 0);
+        if (maxPower > 0) power = Mathf.Min(power, maxPower);
     }
 
     public Vector3[] PullbackLine()
@@ -97,10 +107,24 @@ public class BallMovement : MonoBehaviour
         return points;
     }
 
-    public List<Vector3> TrajectoryLine()
+    public Vector3[] TrajectoryLine()
     {
+        // TODO: add the reference
         List<Vector3> points = new List<Vector3>();
 
-        return points;
-    }
+        int steps = (int)(indicatorDuration / indicatorStep); //Calculates amount of steps simulation will iterate for
+        float _vel = power / rb.mass * Time.fixedDeltaTime; // Velocity = Force / Mass * time
+
+        for (int i = 0; i < 50; ++i) //Iterate a ForLoop over number of Steps
+        {
+            // Remember f(t) = (x0 + x*t, y0 + y*t - 9.81t²/2)
+            // To calculate new Position at each Step... Origin + (LaunchDirection * (LaunchSpeed * Current Step * Length of a Step)
+            Vector3 pos = (Vector2)transform.position + (shotDirection * _vel * i * indicatorStep); // Calculate new Vector at flat speed
+
+            pos.y += Physics2D.gravity.y / 2 * Mathf.Pow((i * indicatorStep), 2); // Factor in Gravity, affecting only the Y-Axis (y0 + y*t - 9.81t²/2)
+            points.Add(pos); //Add this to the next entry on the list
+        }
+
+        return points.ToArray();
+    } 
 }
