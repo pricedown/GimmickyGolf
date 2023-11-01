@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,11 +13,12 @@ public class BallMovement : MonoBehaviour
     public float drawForce; 
     
     [Header("Runtime")]
-    public bool isClicked = false;
+    public bool isClicked = false, still;
     public LineRenderer pullbackIndicator;
     public Vector2 relativeMousePos, storedPos, mousePos, screenSize;
-    public float power;
+    public float power, portalCD;
     private Rigidbody2D rb;
+    public GameObject cursorIndicatorPrefab;
     public Camera cam;
 
     private void Start()
@@ -27,6 +27,14 @@ public class BallMovement : MonoBehaviour
         cam = Camera.main;
         pullbackIndicator = GetComponent<LineRenderer>();
         screenSize = new Vector2(Screen.width, Screen.height);
+    }
+    private void FixedUpdate()
+    {
+        if(portalCD > 0)
+        {
+            portalCD -= Time.deltaTime;
+        }
+        if (rb.velocity.magnitude <= 0.1f) still = true; else still = false;
     }
 
     public void MousePosition(InputAction.CallbackContext context)
@@ -55,14 +63,25 @@ public class BallMovement : MonoBehaviour
     
     public void Shoot(Vector2 drawback)
     {
-        Vector2 shotDirection = -drawback.normalized; // reverse direction (bow physics)
-        power = drawForce * drawback.magnitude; // F = draw force constant * draw length
+        if (still)
+        {
+            Vector2 shotDirection = -drawback.normalized; // reverse direction (bow physics)
+            power = drawForce * drawback.magnitude; // F = draw force constant * draw length
 
-        // clamp 
-        power = Mathf.Max(power, 0);
-        if (maxPower > 0) power = Mathf.Min(power, maxPower);
-        
-        rb.AddForce(power * shotDirection);
+            // clamp 
+            power = Mathf.Max(power, 0);
+            if (maxPower > 0) power = Mathf.Min(power, maxPower);
+
+            rb.AddForce(power * shotDirection);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Portal" && portalCD <= 0)
+        {
+            transform.position = collision.GetComponent<PortalController>().otherPortal.transform.position;
+            portalCD = 0.25f;
+        }
     }
 
     public Vector3[] PullbackLine()

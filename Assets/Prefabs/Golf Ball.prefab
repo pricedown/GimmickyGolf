@@ -162,14 +162,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f94ac4f9088db14d8e01a7fc24716e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pullback: {fileID: 0}
+  maxPower: 500
+  drawForce: 0
+  isClicked: 0
   relativeMousePos: {x: 0, y: 0}
   storedPos: {x: 0, y: 0}
   mousePos: {x: 0, y: 0}
   screenSize: {x: 0, y: 0}
-  maxPower: 500
-  powerMultiplier: 1000
   power: 0
-  isClicked: 0
+  still: 0
+  cursorIndicatorPrefab: {fileID: 6860199488392732777, guid: 518245c922a193e40a1730aa3474f89d, type: 3}
+  cursorIndicator: {fileID: 0}
+  cursorTransform: {fileID: 0}
 --- !u!114 &3638383410899674423
 MonoBehaviour:
   m_ObjectHideFlags: 0
