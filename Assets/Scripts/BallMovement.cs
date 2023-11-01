@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR;
 
 public class BallMovement : MonoBehaviour
 {
@@ -13,10 +14,10 @@ public class BallMovement : MonoBehaviour
     public float drawForce; 
     
     [Header("Runtime")]
-    public bool isClicked = false, still;
+    public bool isClicked = false, still, glued = false;
     public LineRenderer pullbackIndicator;
     public Vector2 relativeMousePos, storedPos, mousePos, screenSize;
-    public float power;
+    public float power, glueCD = 0;
     private Rigidbody2D rb;
     public GameObject cursorIndicatorPrefab;
     public Camera cam;
@@ -30,6 +31,14 @@ public class BallMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        if (glued)
+        {
+            rb.velocity = Vector2.zero;
+            rb.isKinematic = true;
+        } else if(glueCD > 0)
+        {
+            glueCD -= Time.deltaTime;
+        }
         still = (rb.velocity.magnitude <= 0.05f);
         
         pullbackIndicator.SetPositions(PullbackLine());
@@ -64,6 +73,9 @@ public class BallMovement : MonoBehaviour
     {
         if (still)
         {
+            if (glued) glueCD = 0.1f;
+            glued = false;
+            rb.isKinematic = false;
             Vector2 shotDirection = -drawback.normalized; // reverse direction (bow physics)
             power = drawForce * drawback.magnitude; // F = draw force constant * draw length
 

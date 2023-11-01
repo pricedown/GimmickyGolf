@@ -240,7 +240,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
+  m_LinearDrag: 0.8
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -305,12 +305,14 @@ MonoBehaviour:
   drawForce: 1500
   isClicked: 0
   still: 0
+  glued: 0
   pullbackIndicator: {fileID: 0}
   relativeMousePos: {x: 0, y: 0}
   storedPos: {x: 0, y: 0}
   mousePos: {x: 0, y: 0}
   screenSize: {x: 0, y: 0}
   power: 0
+  glueCD: 0
   cursorIndicatorPrefab: {fileID: 6860199488392732777, guid: 518245c922a193e40a1730aa3474f89d, type: 3}
   cam: {fileID: 0}
 --- !u!114 &3638383410899674423
