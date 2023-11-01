@@ -42,3 +42,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: HoleLayer
+    uniqueID: 896945363
+    locked: 0
