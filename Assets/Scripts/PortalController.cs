@@ -27,6 +27,7 @@ public class PortalController : MonoBehaviour
         var angle = Mathf.Atan2(yDifference, xDifference)-thisRot;
         var newAngle = otherRot - angle + Mathf.PI;
         var dist = Vector2.Distance(target.transform.position, transform.position);
+        dist *= otherPortal.transform.localScale.y / transform.localScale.y;
         var newPosition = new Vector2(otherPortal.transform.position.x + dist*Mathf.Cos(newAngle), otherPortal.transform.position.y + dist*Mathf.Sin(newAngle));
         target.transform.position = newPosition;
         var diff = -thisRot +otherRot - Mathf.PI;
