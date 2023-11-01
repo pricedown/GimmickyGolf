@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor.SearchService;
 using UnityEngine;
 
@@ -23,15 +24,15 @@ public class PortalController : MonoBehaviour
         var thisRot = transform.rotation.eulerAngles.z*Mathf.PI/180;
         var xDifference = transform.position.x - target.transform.position.x;
         var yDifference = transform.position.y - target.transform.position.y;
-        var angle = (thisRot-Mathf.Atan2(yDifference, xDifference)+2*Mathf.PI) % 2*Mathf.PI;
-        print(angle / Mathf.PI*180);
-        print(Mathf.Atan2(yDifference, xDifference) / Mathf.PI * 180);
-        var newAngle = otherRot-angle+Mathf.PI;
+        var angle = Mathf.Atan2(yDifference, xDifference)-thisRot;
+        var newAngle = otherRot - angle + Mathf.PI;
         var dist = Vector2.Distance(target.transform.position, transform.position);
+        dist *= otherPortal.transform.localScale.y / transform.localScale.y;
         var newPosition = new Vector2(otherPortal.transform.position.x + dist*Mathf.Cos(newAngle), otherPortal.transform.position.y + dist*Mathf.Sin(newAngle));
         target.transform.position = newPosition;
-
-
-
+        var diff = -thisRot +otherRot - Mathf.PI;
+        var rb = target.GetComponent<Rigidbody2D>();
+        var newVelo = new Vector2(rb.velocity.x*Mathf.Cos(diff)-rb.velocity.y*Mathf.Sin(diff),rb.velocity.x*Mathf.Sin(diff)+rb.velocity.y*Mathf.Cos(diff));
+        rb.velocity = newVelo;
     }
 }

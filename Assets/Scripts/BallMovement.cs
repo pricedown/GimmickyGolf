@@ -23,10 +23,13 @@ public class BallMovement : MonoBehaviour
     public LineRenderer pullbackIndicator, trajectoryIndicator;
     public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection;
     public float power, portalCD;
+    public bool isClicked = false, still, glued = false;
+    public LineRenderer pullbackIndicator;
+    public Vector2 relativeMousePos, storedPos, mousePos, screenSize;
+    public float power, glueCD = 0  ;
     private Rigidbody2D rb;
     public GameObject cursorIndicatorPrefab;
     public Camera cam;
-    
 
     private void Start()
     {
@@ -42,26 +45,30 @@ public class BallMovement : MonoBehaviour
             portalCD -= Time.deltaTime;
 
         still = (rb.velocity.magnitude <= 0.05f);
-        
-        
-        if (isClicked && still)
+
+
+        if (still)
         {
-            // Set up for a Stroke
-            Vector2 drawback = relativeMousePos - storedPos;
-            UpdateShot(drawback);
-            
-            pullbackIndicator.enabled = true;
-            trajectoryIndicator.enabled = true;
-            pullbackIndicator.SetPositions(PullbackLine());
-            trajectoryIndicator.SetPositions(TrajectoryLine());
-        }
-        else
-        {
+            if (glued) glueCD = 0.1f;
+            glued = false;
+            rb.isKinematic = false;
+            if (isClicked)
+            {
+                // Set up for a Stroke
+                Vector2 drawback = relativeMousePos - storedPos;
+                UpdateShot(drawback);
+
+                pullbackIndicator.enabled = true;
+                trajectoryIndicator.enabled = true;
+                pullbackIndicator.SetPositions(PullbackLine());
+                trajectoryIndicator.SetPositions(TrajectoryLine());
+            }
+        } else {
             pullbackIndicator.enabled = false;
             //trajectoryIndicator.enabled = false;
         }
     }
-    
+
     public void MousePosition(InputAction.CallbackContext context)
     {
         mousePos = context.ReadValue<Vector2>();
@@ -91,18 +98,6 @@ public class BallMovement : MonoBehaviour
         // clamp 
         power = Mathf.Max(power, 0);
         if (maxPower > 0) power = Mathf.Min(power, maxPower);
-    }
-    
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Portal" && portalCD <= 0)
-        {
-            collision.GetComponent<PortalController>().Warp(this.gameObject);
-            Vector3 diff = (transform.position-collision.transform.position)*collision.GetComponent<PortalController>().offSetMult;
-            //transform.position = collision.GetComponent<PortalController>().otherPortal.transform.position+diff;
-
-            portalCD = 0.25f;
-        }
     }
 
     public Vector3[] PullbackLine()

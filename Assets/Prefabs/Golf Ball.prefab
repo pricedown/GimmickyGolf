@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 4106857796016179421}
   - component: {fileID: 3638383410899674423}
   - component: {fileID: 727863611223673193}
+  - component: {fileID: 6900687345747239095}
   m_Layer: 0
   m_Name: Golf Ball
   m_TagString: Player
@@ -239,7 +240,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 1
+  m_LinearDrag: 0.8
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -304,13 +305,14 @@ MonoBehaviour:
   drawForce: 1500
   isClicked: 0
   still: 0
+  glued: 0
   pullbackIndicator: {fileID: 0}
   relativeMousePos: {x: 0, y: 0}
   storedPos: {x: 0, y: 0}
   mousePos: {x: 0, y: 0}
   screenSize: {x: 0, y: 0}
   power: 0
-  portalCD: 0
+  glueCD: 0
   cursorIndicatorPrefab: {fileID: 6860199488392732777, guid: 518245c922a193e40a1730aa3474f89d, type: 3}
   cam: {fileID: 0}
 --- !u!114 &3638383410899674423
@@ -479,6 +481,18 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &6900687345747239095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5960602035405886146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 299fb912224222c4697e1694421f53f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7815927648222041144
 GameObject:
   m_ObjectHideFlags: 0
