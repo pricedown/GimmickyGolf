@@ -46,3 +46,6 @@ TagManager:
   - name: HoleLayer
     uniqueID: 896945363
     locked: 0
+  - name: Effect
+    uniqueID: 3168376077
+    locked: 0

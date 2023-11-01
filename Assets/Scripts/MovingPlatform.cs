@@ -5,8 +5,8 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour
 {
     public float speed;
-    public List<Transform> targets = new List<Transform>();
-    private List<Vector2> locations = new List<Vector2>();
+    public List<Transform> targets = new();
+    private List<Vector2> locations = new();
     public int targetChoice = 0;
 
     private void Start()
