@@ -25,7 +25,7 @@ public class BallMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         cam = Camera.main;
-        pullbackIndicator = GetComponent<LineRenderer>();
+        pullbackIndicator = GameObject.Find("Pullback").GetComponent<LineRenderer>();
         screenSize = new Vector2(Screen.width, Screen.height);
     }
     private void FixedUpdate()
@@ -94,6 +94,13 @@ public class BallMovement : MonoBehaviour
         for (int i = 0; i < 2; i++)
             points[i].z = 0;
         
+        return points;
+    }
+
+    public List<Vector3> TrajectoryLine()
+    {
+        List<Vector3> points = new List<Vector3>();
+
         return points;
     }
 }
