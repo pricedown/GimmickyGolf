@@ -5,10 +5,11 @@ using UnityEngine.InputSystem;
 
 public class BallMovement : MonoBehaviour
 {
-    // maximum force that can be applied to the ball in a swing, 0 means uncapped
+    // maximum force that can be applied to the ball in a swing
+    // 0 means uncapped
     public float maxPower; 
     
-    // draw weight constant of the "bow" that flings the ball
+    // draw weight of the "bow" that flings the ball
     public float drawForce; 
     
     [Header("Runtime")]
@@ -43,6 +44,7 @@ public class BallMovement : MonoBehaviour
             isClicked = false;
         }
     }
+    
     public void Shoot(Vector2 drawback)
     {
         Vector2 shotDirection = -drawback.normalized; // reverse direction (bow physics)
