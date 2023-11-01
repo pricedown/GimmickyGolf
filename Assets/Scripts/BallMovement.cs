@@ -31,33 +31,35 @@ public class BallMovement : MonoBehaviour
     private void FixedUpdate()
     {
         if(portalCD > 0)
-        {
             portalCD -= Time.deltaTime;
-        }
-        if (rb.velocity.magnitude <= 0.1f) still = true; else still = false;
+
+        still = (rb.velocity.magnitude <= 0.1f);
+        
+        pullbackIndicator.SetPositions(PullbackLine());
+        pullbackIndicator.enabled = isClicked && still;
     }
 
     public void MousePosition(InputAction.CallbackContext context)
     {
         mousePos = context.ReadValue<Vector2>();
         relativeMousePos = mousePos / screenSize;
-        
-        pullbackIndicator.SetPositions(PullbackLine());
-        pullbackIndicator.enabled = isClicked;
     }
 
     public void Click(InputAction.CallbackContext context)
     {
         if (context.performed) // on click
         {
-            storedPos = relativeMousePos;
             isClicked = true;
+            storedPos = relativeMousePos;
         }
         if (context.canceled) // on release
         {
-            Vector2 drawback = relativeMousePos - storedPos;
-            Shoot(drawback);
             isClicked = false;
+            if (still)
+            {
+                Vector2 drawback = relativeMousePos - storedPos;
+                Shoot(drawback);
+            }
         }
     }
     
@@ -75,6 +77,7 @@ public class BallMovement : MonoBehaviour
             rb.AddForce(power * shotDirection);
         }
     }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Portal" && portalCD <= 0)
