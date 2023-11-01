@@ -82,7 +82,10 @@ public class BallMovement : MonoBehaviour
     {
         if(collision.gameObject.tag == "Portal" && portalCD <= 0)
         {
-            transform.position = collision.GetComponent<PortalController>().otherPortal.transform.position;
+            collision.GetComponent<PortalController>().Warp(this.gameObject);
+            Vector3 diff = (transform.position-collision.transform.position)*collision.GetComponent<PortalController>().offSetMult;
+            //transform.position = collision.GetComponent<PortalController>().otherPortal.transform.position+diff;
+
             portalCD = 0.25f;
         }
     }
