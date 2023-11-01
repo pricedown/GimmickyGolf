@@ -18,15 +18,12 @@ public class BallMovement : MonoBehaviour
     public float indicatorDuration = 5f, indicatorStep = 0.1f;
     
     [Header("Runtime")]
-    public bool isClicked = false, still;
 
     public LineRenderer pullbackIndicator, trajectoryIndicator;
     public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection;
-    public float power, portalCD;
+    public float power;
     public bool isClicked = false, still, glued = false;
-    public LineRenderer pullbackIndicator;
-    public Vector2 relativeMousePos, storedPos, mousePos, screenSize;
-    public float power, glueCD = 0  ;
+    public float portalCD, glueCD = 0;
     private Rigidbody2D rb;
     public GameObject cursorIndicatorPrefab;
     public Camera cam;
