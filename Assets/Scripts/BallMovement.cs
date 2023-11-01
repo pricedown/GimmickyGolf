@@ -16,7 +16,7 @@ public class BallMovement : MonoBehaviour
     public bool isClicked = false, still;
     public LineRenderer pullbackIndicator;
     public Vector2 relativeMousePos, storedPos, mousePos, screenSize;
-    public float power, portalCD;
+    public float power;
     private Rigidbody2D rb;
     public GameObject cursorIndicatorPrefab;
     public Camera cam;
@@ -30,9 +30,6 @@ public class BallMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(portalCD > 0)
-            portalCD -= Time.deltaTime;
-
         still = (rb.velocity.magnitude <= 0.05f);
         
         pullbackIndicator.SetPositions(PullbackLine());
@@ -75,18 +72,6 @@ public class BallMovement : MonoBehaviour
             if (maxPower > 0) power = Mathf.Min(power, maxPower);
 
             rb.AddForce(power * shotDirection);
-        }
-    }
-    
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Portal" && portalCD <= 0)
-        {
-            collision.GetComponent<PortalController>().Warp(this.gameObject);
-            Vector3 diff = (transform.position-collision.transform.position)*collision.GetComponent<PortalController>().offSetMult;
-            //transform.position = collision.GetComponent<PortalController>().otherPortal.transform.position+diff;
-
-            portalCD = 0.25f;
         }
     }
 
