@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class BallMovement : MonoBehaviour
 {
-<<<<<<< HEAD
     // maximum force that can be applied to the ball in a swing
     // 0 means uncapped
-=======
-    public LineRenderer pullback;
-
-    // maximum force that can be applied to the ball in a swing, 0 means uncapped
->>>>>>> 0345ffe808b539dc9502d0a546f0e196f25f5fd8
     public float maxPower; 
     
     // draw weight of the "bow" that flings the ball
@@ -20,13 +15,17 @@ public class BallMovement : MonoBehaviour
     
     [Header("Runtime")]
     public bool isClicked = false;
+    public LineRenderer pullbackIndicator;
     public Vector2 relativeMousePos, storedPos, mousePos, screenSize;
     public float power;
     private Rigidbody2D rb;
+    public Camera cam;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        cam = Camera.main;
+        pullbackIndicator = GetComponent<LineRenderer>();
         screenSize = new Vector2(Screen.width, Screen.height);
     }
 
@@ -34,6 +33,9 @@ public class BallMovement : MonoBehaviour
     {
         mousePos = context.ReadValue<Vector2>();
         relativeMousePos = mousePos / screenSize;
+        
+        pullbackIndicator.SetPositions(PullbackLine());
+        pullbackIndicator.enabled = isClicked;
     }
 
     public void Click(InputAction.CallbackContext context)
@@ -61,5 +63,15 @@ public class BallMovement : MonoBehaviour
         if (maxPower > 0) power = Mathf.Min(power, maxPower);
         
         rb.AddForce(power * shotDirection);
+    }
+
+    public Vector3[] PullbackLine()
+    {
+        Vector3[] points = new Vector3[] { cam.ScreenToWorldPoint(mousePos), cam.ScreenToWorldPoint(storedPos * screenSize) };
+       
+        for (int i = 0; i < 2; i++)
+            points[i].z = 0;
+        
+        return points;
     }
 }
