@@ -33,7 +33,7 @@ public class BallMovement : MonoBehaviour
         if(portalCD > 0)
             portalCD -= Time.deltaTime;
 
-        still = (rb.velocity.magnitude <= 0.1f);
+        still = (rb.velocity.magnitude <= 0.05f);
         
         pullbackIndicator.SetPositions(PullbackLine());
         pullbackIndicator.enabled = isClicked && still;
