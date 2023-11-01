@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class BallMovement : MonoBehaviour
 {
+    public LineRenderer pullback;
+
     // maximum force that can be applied to the ball in a swing, 0 means uncapped
     public float maxPower; 
     
