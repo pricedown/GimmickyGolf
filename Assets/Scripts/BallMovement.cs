@@ -5,8 +5,14 @@ using UnityEngine.InputSystem;
 
 public class BallMovement : MonoBehaviour
 {
+<<<<<<< HEAD
     // maximum force that can be applied to the ball in a swing
     // 0 means uncapped
+=======
+    public LineRenderer pullback;
+
+    // maximum force that can be applied to the ball in a swing, 0 means uncapped
+>>>>>>> 0345ffe808b539dc9502d0a546f0e196f25f5fd8
     public float maxPower; 
     
     // draw weight of the "bow" that flings the ball
