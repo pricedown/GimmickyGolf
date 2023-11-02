@@ -131,6 +131,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1001598908014745914, guid: d9c5dc411fbca714d8c9588eab50d154, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4106857796016179421, guid: d9c5dc411fbca714d8c9588eab50d154, type: 3}
+      propertyPath: indicatorDuration
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4285229042379576299, guid: d9c5dc411fbca714d8c9588eab50d154, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -190,7 +198,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5887152893980077317, guid: 3274d64af6177db44bece4f0168ec419, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 5887152893980077317, guid: 3274d64af6177db44bece4f0168ec419, type: 3}
       propertyPath: m_LocalScale.y
@@ -202,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5887152893980077317, guid: 3274d64af6177db44bece4f0168ec419, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 5887152893980077317, guid: 3274d64af6177db44bece4f0168ec419, type: 3}
       propertyPath: m_LocalPosition.z
@@ -260,6 +268,10 @@ PrefabInstance:
     - target: {fileID: 4224511893716153570, guid: 85a0703a0d6875242b48356dd5547d8a, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7320888043795957398, guid: 85a0703a0d6875242b48356dd5547d8a, type: 3}
+      propertyPath: orthographic size
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8683605298400290132, guid: 85a0703a0d6875242b48356dd5547d8a, type: 3}
       propertyPath: m_LocalPosition.x

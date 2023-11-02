@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 public class BallMovement : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class BallMovement : MonoBehaviour
     // trajectory indicator
     // duration: simulated foresight
     // step: roughness of simulation
-    public float indicatorDuration = 5f, indicatorStep = 0.1f;
+    public float indicatorDuration = 5f;
     
     [Header("Runtime")]
 
@@ -63,6 +64,7 @@ public class BallMovement : MonoBehaviour
         } else {
             pullbackIndicator.enabled = false;
             //trajectoryIndicator.enabled = false;
+            print(shotTime - Time.time);
         }
     }
 
@@ -71,6 +73,8 @@ public class BallMovement : MonoBehaviour
         mousePos = context.ReadValue<Vector2>();
         relativeMousePos = mousePos / screenSize;
     }
+
+    private float shotTime;
 
     public void Click(InputAction.CallbackContext context)
     {
@@ -82,8 +86,11 @@ public class BallMovement : MonoBehaviour
         if (context.canceled) // on release
         {
             isClicked = false;
-            if (still) // TODO: add cancelling of action
+            if (still)
+            {
                 rb.AddForce(power * shotDirection);
+                shotTime = Time.time;
+            }// TODO: add cancelling of action
         }
     }
     
@@ -106,20 +113,27 @@ public class BallMovement : MonoBehaviour
         
         return points;
     }
+    
     public Vector3[] TrajectoryLine()
     {
+        trajectoryIndicator.positionCount = (int)Mathf.Ceil(indicatorDuration / Time.fixedDeltaTime) + 1; // plus one for initial position
         List<Vector3> points = new List<Vector3>();
-        Vector3 initialVelocity = shotDirection * ((power / rb.mass) * Time.fixedDeltaTime); // v0 = (F/m) * t 
         
-        // remember, every tick:
-        // rb.velocity *= Mathf.Clamp01(1f - rb.drag * Time.fixedDeltaTime);
-        // so how do we account for rb.drag?
-        
-        for (float deltaTime = 0; deltaTime < indicatorDuration; deltaTime += indicatorStep)
+        Vector3 initialVelocity = rb.velocity + shotDirection * ((power / rb.mass) * Time.fixedDeltaTime); // v0 = (F/m) * t 
+
+        Vector3 velocity = initialVelocity;
+        points.Add(transform.position);
+        for (int i = 0; i < trajectoryIndicator.positionCount; i++)
         {
-            Vector3 pos = transform.position + (initialVelocity * deltaTime);
-            pos.y += 0.5f * Physics2D.gravity.y * Mathf.Pow(deltaTime, 2);
-            points.Add(pos);
+            Vector3 newPoint = points.Last();
+            
+            // calculate velocity from accelerations and time
+            velocity += Physics.gravity * Time.fixedDeltaTime;  // gravity
+            velocity = velocity * Mathf.Clamp01(1f - rb.drag * Time.fixedDeltaTime); // drag
+            // calculate position from velocities
+            newPoint += (velocity * Time.fixedDeltaTime);
+            
+            points.Add(newPoint);
         }
         return points.ToArray();
     }
