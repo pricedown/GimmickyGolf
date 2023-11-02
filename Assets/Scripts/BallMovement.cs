@@ -106,25 +106,21 @@ public class BallMovement : MonoBehaviour
         
         return points;
     }
-
     public Vector3[] TrajectoryLine()
     {
-        // TODO: add the reference
         List<Vector3> points = new List<Vector3>();
-
-        int steps = (int)(indicatorDuration / indicatorStep); //Calculates amount of steps simulation will iterate for
-        float _vel = power / rb.mass * Time.fixedDeltaTime; // Velocity = Force / Mass * time
-
-        for (int i = 0; i < 50; ++i) //Iterate a ForLoop over number of Steps
+        Vector3 initialVelocity = shotDirection * ((power / rb.mass) * Time.fixedDeltaTime); // v0 = (F/m) * t 
+        
+        // remember, every tick:
+        // rb.velocity *= Mathf.Clamp01(1f - rb.drag * Time.fixedDeltaTime);
+        // so how do we account for rb.drag?
+        
+        for (float deltaTime = 0; deltaTime < indicatorDuration; deltaTime += indicatorStep)
         {
-            // Remember f(t) = (x0 + x*t, y0 + y*t - 9.81t²/2)
-            // To calculate new Position at each Step... Origin + (LaunchDirection * (LaunchSpeed * Current Step * Length of a Step)
-            Vector3 pos = (Vector2)transform.position + (shotDirection * _vel * i * indicatorStep); // Calculate new Vector at flat speed
-
-            pos.y += Physics2D.gravity.y / 2 * Mathf.Pow((i * indicatorStep), 2); // Factor in Gravity, affecting only the Y-Axis (y0 + y*t - 9.81t²/2)
-            points.Add(pos); //Add this to the next entry on the list
+            Vector3 pos = transform.position + (initialVelocity * deltaTime);
+            pos.y += 0.5f * Physics2D.gravity.y * Mathf.Pow(deltaTime, 2);
+            points.Add(pos);
         }
-
         return points.ToArray();
-    } 
+    }
 }
