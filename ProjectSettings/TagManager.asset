@@ -43,7 +43,7 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: HoleLayer
+  - name: WallLayer
     uniqueID: 896945363
     locked: 0
   - name: Effect
