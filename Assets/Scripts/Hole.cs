@@ -18,4 +18,8 @@ public class Hole : MonoBehaviour
             print("HoleComplete");
         }
     }
+    private void HoleComplete()
+    {
+
+    }
 }
