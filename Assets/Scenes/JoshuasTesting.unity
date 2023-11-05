@@ -832,7 +832,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Glue (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1403,11 +1404,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 468706333241626465, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6348849432322216510, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
       propertyPath: m_LocalScale.x
       value: 8.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6348849432322216510, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6348849432322216510, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1461,7 +1466,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Glue
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

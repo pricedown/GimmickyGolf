@@ -24,7 +24,7 @@ public class BallMovement : MonoBehaviour
     public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection;
     public float power;
     public bool isClicked = false, still, glued = false;
-    public float portalCD, glueCD = 0;
+    public float portalCD;
     private Rigidbody2D rb;
     public GameObject cursorIndicatorPrefab;
     public Camera cam;
@@ -41,7 +41,6 @@ public class BallMovement : MonoBehaviour
     {
         if (glued) rb.velocity = Vector2.zero;
         if (portalCD > 0) portalCD -= Time.deltaTime;
-        if (glueCD > 0) glueCD -= Time.deltaTime;
         still = (rb.velocity.magnitude <= 0.05f);
 
         if (still)
@@ -86,7 +85,6 @@ public class BallMovement : MonoBehaviour
             {
                 if (glued)
                 {
-                    glueCD = 0.05f;
                     glued = false;
                     rb.isKinematic = false;
                 }
@@ -138,5 +136,14 @@ public class BallMovement : MonoBehaviour
             points.Add(newPoint);
         }
         return points.ToArray();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "glue")
+        {
+            glued = true;
+            rb.velocity = Vector2.zero;
+            rb.isKinematic = true;
+        }
     }
 }
