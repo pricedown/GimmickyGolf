@@ -697,7 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee84c0e9f37fdc409e1eb8278349902, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DefaultScene: CalebScene
+  DefaultScene: CalebTest
 --- !u!1 &1679499892
 GameObject:
   m_ObjectHideFlags: 0
