@@ -16,19 +16,19 @@ public class Hole : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        storedTime = Time.time;
+        storedTime = Time.time; // Get time the ball gets in the hole
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(Time.time - storedTime > timeDiff && !hasCompleted)
+        if(Time.time - storedTime > timeDiff && !hasCompleted) // Check if the ball has been in the hole for long enough
         {
             HoleComplete();
         }
     }
     private void HoleComplete()
     {
-        holeCompleteText.SetActive(true);
+        holeCompleteText.SetActive(true); // Show the text saying the hole has been completed
         hasCompleted = true;
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; // Stop the scene
     }
 }
