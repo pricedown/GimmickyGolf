@@ -6,6 +6,13 @@ public class Hole : MonoBehaviour
 {
     public float timeDiff;
     private float storedTime;
+    private bool hasCompleted = false;
+    public GameObject holeCompleteText;
+
+    private void Start()
+    {
+        holeCompleteText.SetActive(false);
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -13,13 +20,15 @@ public class Hole : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(Time.time - storedTime > timeDiff)
+        if(Time.time - storedTime > timeDiff && !hasCompleted)
         {
-            print("HoleComplete");
+            HoleComplete();
         }
     }
     private void HoleComplete()
     {
-
+        holeCompleteText.SetActive(true);
+        hasCompleted = true;
+        Time.timeScale = 0f;
     }
 }

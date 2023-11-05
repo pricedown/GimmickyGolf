@@ -63,7 +63,7 @@ public class BallMovement : MonoBehaviour
             }
         } else {
             pullbackIndicator.enabled = false;
-            //trajectoryIndicator.enabled = false;
+            trajectoryIndicator.enabled = false;
             print(shotTime - Time.time);
         }
     }
