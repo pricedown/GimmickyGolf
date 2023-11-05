@@ -7,5 +7,5 @@ PhysicsMaterial2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Golf Ball
-  friction: 0.5
-  bounciness: 0.5
+  friction: 5.9
+  bounciness: 0.3

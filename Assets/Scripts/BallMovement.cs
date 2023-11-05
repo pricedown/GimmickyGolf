@@ -44,14 +44,12 @@ public class BallMovement : MonoBehaviour
 
         still = (rb.velocity.magnitude <= 0.05f);
 
-
         if (still)
         {
-            if (glued) glueCD = 0.1f;
-            glued = false;
-            rb.isKinematic = false;
             if (isClicked)
             {
+            	if (glued) glueCD = 0.1f;
+            	rb.isKinematic = false;
                 // Set up for a Stroke
                 Vector2 drawback = relativeMousePos - storedPos;
                 UpdateShot(drawback);
@@ -128,7 +126,7 @@ public class BallMovement : MonoBehaviour
             Vector3 newPoint = points.Last();
             
             // calculate velocity from accelerations and time
-            velocity += Physics.gravity * Time.fixedDeltaTime;  // gravity
+            velocity += Physics.gravity * rb.gravityScale * Time.fixedDeltaTime;  // gravity
             velocity = velocity * Mathf.Clamp01(1f - rb.drag * Time.fixedDeltaTime); // drag
             // calculate position from velocities
             newPoint += (velocity * Time.fixedDeltaTime);
