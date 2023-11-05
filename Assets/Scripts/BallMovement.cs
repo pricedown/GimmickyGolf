@@ -39,17 +39,15 @@ public class BallMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(portalCD > 0)
-            portalCD -= Time.deltaTime;
-
+        if (glued) rb.velocity = Vector2.zero;
+        if (portalCD > 0) portalCD -= Time.deltaTime;
+        if (glueCD > 0) glueCD -= Time.deltaTime;
         still = (rb.velocity.magnitude <= 0.05f);
 
         if (still)
         {
             if (isClicked)
             {
-            	if (glued) glueCD = 0.1f;
-            	rb.isKinematic = false;
                 // Set up for a Stroke
                 Vector2 drawback = relativeMousePos - storedPos;
                 UpdateShot(drawback);
@@ -86,6 +84,12 @@ public class BallMovement : MonoBehaviour
             isClicked = false;
             if (still)
             {
+                if (glued)
+                {
+                    glueCD = 0.05f;
+                    glued = false;
+                    rb.isKinematic = false;
+                }
                 rb.AddForce(power * shotDirection);
                 shotTime = Time.time;
             }// TODO: add cancelling of action
