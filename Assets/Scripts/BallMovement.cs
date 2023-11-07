@@ -21,7 +21,7 @@ public class BallMovement : MonoBehaviour
     [Header("Runtime")]
 
     public LineRenderer pullbackIndicator, trajectoryIndicator;
-    public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection;
+    public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection, previousPos;
     public float power;
     public bool isClicked = false, still, glued = false;
     public float portalCD;
@@ -90,6 +90,7 @@ public class BallMovement : MonoBehaviour
                 }
                 rb.AddForce(power * shotDirection);
                 shotTime = Time.time;
+                previousPos = transform.position;
             }// TODO: add cancelling of action
         }
     }
@@ -139,11 +140,16 @@ public class BallMovement : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "glue")
+        if(collision.gameObject.tag == "Glue")
         {
             glued = true;
             rb.velocity = Vector2.zero;
             rb.isKinematic = true;
+        }
+        if (collision.gameObject.tag == "Water")
+        {
+            rb.velocity = Vector2.zero;
+            transform.position = previousPos;
         }
     }
 }
