@@ -151,8 +151,9 @@ public class BallMovement : MonoBehaviour
         }
         if (collision.gameObject.tag == "Water")
         {
-            rb.velocity = Vector2.zero;
             transform.position = previousPos;
+            rb.velocity = Vector2.zero;
+            rb.inertia = 0;
         }
     }
 }
