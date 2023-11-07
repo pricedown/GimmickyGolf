@@ -312,6 +312,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3351451133722293276, guid: 968ff79bc8769174f88c804a7bab68d7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5138576022696542654, guid: 968ff79bc8769174f88c804a7bab68d7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5220316183912764449, guid: 968ff79bc8769174f88c804a7bab68d7, type: 3}
       propertyPath: m_Name
       value: Hole
