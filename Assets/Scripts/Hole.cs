@@ -41,7 +41,7 @@ public class Hole : MonoBehaviour
         {
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "Best", strokes);
         }
-        strokeText.text = "Strokes: " + strokes + "\tBest: " + PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "Best", strokes);
+        strokeText.text = "Strokes: " + strokes + "\t\tBest: " + PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "Best", strokes);
         hasCompleted = true;
         Time.timeScale = 0f; // Stop the scene
     }
