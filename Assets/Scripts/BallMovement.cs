@@ -28,6 +28,7 @@ public class BallMovement : MonoBehaviour
     private Rigidbody2D rb;
     public GameObject cursorIndicatorPrefab;
     public Camera cam;
+    public int strokeCount = 0;
 
     private void Start()
     {
@@ -59,7 +60,7 @@ public class BallMovement : MonoBehaviour
         } else {
             pullbackIndicator.enabled = false;
             trajectoryIndicator.enabled = false;
-            print(shotTime - Time.time);
+            //print(shotTime - Time.time);
         }
     }
 
@@ -91,6 +92,8 @@ public class BallMovement : MonoBehaviour
                 rb.AddForce(power * shotDirection);
                 shotTime = Time.time;
                 previousPos = transform.position;
+                strokeCount++;
+                print(strokeCount);
             }// TODO: add cancelling of action
         }
     }
