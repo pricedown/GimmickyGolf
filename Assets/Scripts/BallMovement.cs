@@ -93,7 +93,6 @@ public class BallMovement : MonoBehaviour
                 shotTime = Time.time;
                 previousPos = transform.position;
                 strokeCount++;
-                print(strokeCount);
             }// TODO: add cancelling of action
         }
     }

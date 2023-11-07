@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Hole : MonoBehaviour
@@ -36,7 +37,11 @@ public class Hole : MonoBehaviour
     {
         holeCompleteText.SetActive(true); // Show the text saying the hole has been completed
         int strokes = player.GetComponent<BallMovement>().strokeCount;
-        strokeText.text = "Strokes: " + strokes;
+        if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "Best", strokes) >= strokes)
+        {
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name + "Best", strokes);
+        }
+        strokeText.text = "Strokes: " + strokes + "\tBest: " + PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "Best", strokes);
         hasCompleted = true;
         Time.timeScale = 0f; // Stop the scene
     }
