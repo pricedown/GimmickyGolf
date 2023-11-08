@@ -21,7 +21,7 @@ public class BallMovement : MonoBehaviour
     [Header("Runtime")]
 
     public LineRenderer pullbackIndicator, trajectoryIndicator;
-    public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection, previousPos;
+    public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection, previousPos, initialPos;
     public float power;
     public bool isClicked = false, still, glued = false;
     public float portalCD;
@@ -37,6 +37,7 @@ public class BallMovement : MonoBehaviour
         pullbackIndicator = GameObject.Find("Pullback").GetComponent<LineRenderer>();
         trajectoryIndicator = GameObject.Find("Trajectory").GetComponent<LineRenderer>();
         screenSize = new Vector2(Screen.width, Screen.height);
+        initialPos = transform.position;
     }
     private void FixedUpdate()
     {
@@ -103,6 +104,19 @@ public class BallMovement : MonoBehaviour
             isClicked = false;
             pullbackIndicator.enabled = false;
             trajectoryIndicator.enabled = false;
+        }
+    }
+
+    public void ResetPos(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            transform.position = initialPos;
+            Cancel(context);
+            strokeCount = 0;
+            transform.position = previousPos;
+            rb.velocity = Vector2.zero;
+            rb.inertia = 0;
         }
     }
     
