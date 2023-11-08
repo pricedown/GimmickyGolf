@@ -114,7 +114,6 @@ public class BallMovement : MonoBehaviour
             transform.position = initialPos;
             Cancel(context);
             strokeCount = 0;
-            transform.position = previousPos;
             rb.velocity = Vector2.zero;
             rb.inertia = 0;
         }
