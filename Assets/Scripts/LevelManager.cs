@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     public GameObject holeCompleteText;
     public TextMeshProUGUI strokeText;
     public TextMeshProUGUI currentStrokesText;
+    public GameObject pausedScreen;
 
     public void Start()
     {
@@ -27,6 +28,7 @@ public class LevelManager : MonoBehaviour
     public void ResetToNormal()
     {
         holeCompleteText.SetActive(false);
+        pausedScreen.SetActive(false);
         currentStrokesText.gameObject.SetActive(false);
         Time.timeScale = 1f;
     }
@@ -48,5 +50,18 @@ public class LevelManager : MonoBehaviour
     public void LoadPlayer()
     {
         currentStrokesText.gameObject.SetActive(true);
+    }
+    public void PauseUnpause()
+    {
+        if(pausedScreen.activeSelf)
+        {
+            Time.timeScale = 1f;
+            pausedScreen.SetActive(false);
+        }
+        else
+        {
+            Time.timeScale = 0f;
+            pausedScreen.SetActive(true);
+        }
     }
 }

@@ -120,6 +120,14 @@ public class BallMovement : MonoBehaviour
             rb.inertia = 0;
         }
     }
+    public void Pause(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            Cancel(context);
+            LevelManager.instance.PauseUnpause();
+        }
+    }
     
     public void UpdateShot(Vector2 drawback)
     {
