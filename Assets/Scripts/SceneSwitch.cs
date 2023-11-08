@@ -29,7 +29,14 @@ public class SceneSwitch : MonoBehaviour
         }
         num = int.Parse(numChar) + 1;
         string nextLevel = partString + num;
-        SceneManager.LoadScene(nextLevel);
-        LevelManager.instance.ResetToNormal();
+        if(SceneUtility.GetBuildIndexByScenePath(nextLevel) != -1)
+        {
+            SceneManager.LoadScene(nextLevel);
+            LevelManager.instance.ResetToNormal();
+        } 
+        else
+        {
+            SwitchScene();
+        }
     }
 }
