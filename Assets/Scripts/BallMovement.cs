@@ -20,6 +20,9 @@ public class BallMovement : MonoBehaviour
     
     [Header("Runtime")]
 
+    public int magnetStrength;
+    public bool magnetised = false;
+    Vector3 magnetPosition;
     public LineRenderer pullbackIndicator, trajectoryIndicator;
     public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection, previousPos;
     public float power;
@@ -61,6 +64,15 @@ public class BallMovement : MonoBehaviour
             pullbackIndicator.enabled = false;
             trajectoryIndicator.enabled = false;
             //print(shotTime - Time.time);
+        }
+
+        if(magnetised)
+        {
+            float distance = Vector3.Distance(magnetPosition, transform.position);
+            Vector2 targetDirection = (magnetPosition - transform.position).normalized;
+            magnetStrength = (int)(1/distance*65);
+            rb.AddForce(new Vector2(targetDirection.x, targetDirection.y) * magnetStrength);
+
         }
     }
 
@@ -165,4 +177,12 @@ public class BallMovement : MonoBehaviour
             rb.inertia = 0;
         }
     }
+
+    public void setTarget(Vector3 position)
+    {
+        magnetPosition = position;
+        magnetised = true;
+    }
+
+
 }
