@@ -9,6 +9,7 @@ public class SceneSwitch : MonoBehaviour
     public void SwitchScene()
     {
         SceneManager.LoadScene(DefaultScene);
+        LevelManager.instance.ResetToNormal();
     }
     public void SwitchSceneWithName(string scene)
     {
@@ -19,13 +20,16 @@ public class SceneSwitch : MonoBehaviour
     {
         string currentLevel = SceneManager.GetActiveScene().name;
         string numChar = currentLevel[currentLevel.Length - 1] + "";
+        string partString = currentLevel.Substring(0, currentLevel.Length - 1);
         int num = int.Parse(numChar) + 1;
         if(num == 1)
         {
             numChar = currentLevel[currentLevel.Length - 2] + "" + currentLevel[currentLevel.Length - 1];
+            partString = currentLevel.Substring(0, currentLevel.Length - 2);
         }
         num = int.Parse(numChar) + 1;
-        string nextLevel = SceneManager.GetActiveScene().name + "\b" + num;
-        print(nextLevel);
+        string nextLevel = partString + num;
+        SceneManager.LoadScene(nextLevel);
+        LevelManager.instance.ResetToNormal();
     }
 }

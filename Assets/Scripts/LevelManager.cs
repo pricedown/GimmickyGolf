@@ -20,7 +20,12 @@ public class LevelManager : MonoBehaviour
         {
             Destroy(this);
         }
+        ResetToNormal();
+    }
+    public void ResetToNormal()
+    {
         holeCompleteText.SetActive(false);
+        Time.timeScale = 1f;
     }
     public void HoleComplete(GameObject player)
     {
