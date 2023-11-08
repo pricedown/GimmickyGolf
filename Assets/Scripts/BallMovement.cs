@@ -140,6 +140,7 @@ public class BallMovement : MonoBehaviour
         }
         return points.ToArray();
     }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Glue")
