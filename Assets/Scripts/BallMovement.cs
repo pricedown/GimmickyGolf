@@ -79,7 +79,7 @@ public class BallMovement : MonoBehaviour
             isClicked = true;
             storedPos = relativeMousePos;
         }
-        if (context.canceled) // on release
+        if (context.canceled && isClicked) // on release
         {
             isClicked = false;
             if (still)
@@ -94,6 +94,15 @@ public class BallMovement : MonoBehaviour
                 previousPos = transform.position;
                 strokeCount++;
             }// TODO: add cancelling of action
+        }
+    }
+    public void Cancel(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            isClicked = false;
+            pullbackIndicator.enabled = false;
+            trajectoryIndicator.enabled = false;
         }
     }
     

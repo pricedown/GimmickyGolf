@@ -311,14 +311,15 @@ MonoBehaviour:
   mousePos: {x: 0, y: 0}
   screenSize: {x: 0, y: 0}
   shotDirection: {x: 0, y: 0}
+  previousPos: {x: 0, y: 0}
   power: 0
   isClicked: 0
   still: 0
   glued: 0
   portalCD: 0
-  glueCD: 0
   cursorIndicatorPrefab: {fileID: 6860199488392732777, guid: 518245c922a193e40a1730aa3474f89d, type: 3}
   cam: {fileID: 0}
+  strokeCount: 0
 --- !u!114 &3638383410899674423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,6 +377,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: aa193b3c-0138-4fbf-bde3-0c8e874fd4b8
     m_ActionName: Golf Ball/Click[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4106857796016179421}
+        m_TargetAssemblyTypeName: BallMovement, Assembly-CSharp
+        m_MethodName: Cancel
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d135fb7a-c839-4d36-a441-2c82bf546718
+    m_ActionName: Golf Ball/Cancel[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Golf Ball
