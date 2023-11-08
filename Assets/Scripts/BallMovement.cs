@@ -21,7 +21,7 @@ public class BallMovement : MonoBehaviour
     [Header("Runtime")]
 
     public LineRenderer pullbackIndicator, trajectoryIndicator;
-    public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection, previousPos;
+    public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection, previousPos, initialPos;
     public float power;
     public bool isClicked = false, still, glued = false;
     public float portalCD;
@@ -37,6 +37,9 @@ public class BallMovement : MonoBehaviour
         pullbackIndicator = GameObject.Find("Pullback").GetComponent<LineRenderer>();
         trajectoryIndicator = GameObject.Find("Trajectory").GetComponent<LineRenderer>();
         screenSize = new Vector2(Screen.width, Screen.height);
+        initialPos = transform.position;
+        ChangeStrokes(0);
+        LevelManager.instance.LoadPlayer();
     }
     private void FixedUpdate()
     {
@@ -92,7 +95,7 @@ public class BallMovement : MonoBehaviour
                 rb.AddForce(power * shotDirection);
                 shotTime = Time.time;
                 previousPos = transform.position;
-                strokeCount++;
+                ChangeStrokes(1);
             }// TODO: add cancelling of action
         }
     }
@@ -103,6 +106,18 @@ public class BallMovement : MonoBehaviour
             isClicked = false;
             pullbackIndicator.enabled = false;
             trajectoryIndicator.enabled = false;
+        }
+    }
+
+    public void ResetPos(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            transform.position = initialPos;
+            Cancel(context);
+            ChangeStrokes(-1 * strokeCount);
+            rb.velocity = Vector2.zero;
+            rb.inertia = 0;
         }
     }
     
@@ -160,9 +175,22 @@ public class BallMovement : MonoBehaviour
         }
         if (collision.gameObject.tag == "Water")
         {
+            if(Mathf.Abs((previousPos - initialPos).magnitude) < 1f)
+            {
+                ChangeStrokes(-1 * strokeCount);
+            }
             transform.position = previousPos;
             rb.velocity = Vector2.zero;
             rb.inertia = 0;
+        }
+    }
+
+    private void ChangeStrokes(int changeBy)
+    {
+        if (Time.timeScale != 0)
+        {
+            strokeCount += changeBy;
+            LevelManager.instance.SetCurrentStrokes(strokeCount);
         }
     }
 }
