@@ -14,6 +14,7 @@ public class SceneSwitch : MonoBehaviour
     public void SwitchSceneWithName(string scene)
     {
         SceneManager.LoadScene(scene);
+        LevelManager.instance.ResetToNormal();
     }
 
     public void NextLevel()
