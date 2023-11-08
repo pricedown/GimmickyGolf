@@ -39,6 +39,7 @@ public class BallMovement : MonoBehaviour
         screenSize = new Vector2(Screen.width, Screen.height);
         initialPos = transform.position;
         ChangeStrokes(0);
+        LevelManager.instance.LoadPlayer();
     }
     private void FixedUpdate()
     {

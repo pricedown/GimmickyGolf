@@ -11,30 +11,24 @@ public class LevelManager : MonoBehaviour
     public TextMeshProUGUI strokeText;
     public TextMeshProUGUI currentStrokesText;
 
-    public void Awake()
+    public void Start()
     {
         DontDestroyOnLoad(this);
         if (instance == null)
         {
+            ResetToNormal();
             instance = this;
         } else
         {
             Destroy(gameObject);
         }
-        ResetToNormal();
     }
 
     public void ResetToNormal()
     {
         holeCompleteText.SetActive(false);
+        currentStrokesText.gameObject.SetActive(false);
         Time.timeScale = 1f;
-        if(GameObject.FindWithTag("Player") == null)
-        {
-            currentStrokesText.gameObject.SetActive(false);
-        } else
-        {
-            currentStrokesText.gameObject.SetActive(true);
-        }
     }
     public void HoleComplete(GameObject player)
     {
@@ -50,5 +44,9 @@ public class LevelManager : MonoBehaviour
     public void SetCurrentStrokes(int currentStrokes)
     {
         currentStrokesText.text = "Strokes: " + currentStrokes;
+    }
+    public void LoadPlayer()
+    {
+        currentStrokesText.gameObject.SetActive(true);
     }
 }
