@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CalebTest.unity
     guid: 0d8ae5549c143ca4c965c3831265ad06
+  - enabled: 1
+    path: Assets/Scenes/LevelSelect.unity
+    guid: 7a4d8dcce5084d740bbad24691a65502
+  - enabled: 1
+    path: Assets/Scenes/W1L1.unity
+    guid: c5ec98178469cbc479db129d90f9df47
+  - enabled: 1
+    path: Assets/Scenes/W1L2.unity
+    guid: f830643d4198805458b05aeaa12575d6
   m_configObjects: {}

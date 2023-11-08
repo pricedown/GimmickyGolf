@@ -14,4 +14,18 @@ public class SceneSwitch : MonoBehaviour
     {
         SceneManager.LoadScene(scene);
     }
+
+    public void NextLevel()
+    {
+        string currentLevel = SceneManager.GetActiveScene().name;
+        string numChar = currentLevel[currentLevel.Length - 1] + "";
+        int num = int.Parse(numChar) + 1;
+        if(num == 1)
+        {
+            numChar = currentLevel[currentLevel.Length - 2] + "" + currentLevel[currentLevel.Length - 1];
+        }
+        num = int.Parse(numChar) + 1;
+        string nextLevel = SceneManager.GetActiveScene().name + "\b" + num;
+        print(nextLevel);
+    }
 }
