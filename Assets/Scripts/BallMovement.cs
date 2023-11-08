@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
+using Unity.VisualScripting;
 
 public class BallMovement : MonoBehaviour
 {
@@ -25,14 +26,16 @@ public class BallMovement : MonoBehaviour
     public float power;
     public bool isClicked = false, still, glued = false;
     public float portalCD;
-    private Rigidbody2D rb;
     public GameObject cursorIndicatorPrefab;
     public Camera cam;
     public int strokeCount = 0;
+    private Rigidbody2D rb;
+    private CircleCollider2D collider;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        collider = GetComponent<CircleCollider2D>();
         cam = Camera.main;
         pullbackIndicator = GameObject.Find("Pullback").GetComponent<LineRenderer>();
         trajectoryIndicator = GameObject.Find("Trajectory").GetComponent<LineRenderer>();
@@ -73,8 +76,8 @@ public class BallMovement : MonoBehaviour
         relativeMousePos = mousePos / screenSize;
     }
 
-    private float shotTime;
-
+    public float shotTime;
+    
     public void Click(InputAction.CallbackContext context)
     {
         if (context.performed) // on click
@@ -153,22 +156,35 @@ public class BallMovement : MonoBehaviour
     {
         trajectoryIndicator.positionCount = (int)Mathf.Ceil(indicatorDuration / Time.fixedDeltaTime) + 1; // plus one for initial position
         List<Vector3> points = new List<Vector3>();
+        points.Capacity = trajectoryIndicator.positionCount;
         
         Vector3 initialVelocity = rb.velocity + shotDirection * ((power / rb.mass) * Time.fixedDeltaTime); // v0 = (F/m) * t 
 
         Vector3 velocity = initialVelocity;
         points.Add(transform.position);
+        
         for (int i = 0; i < trajectoryIndicator.positionCount; i++)
         {
             Vector3 newPoint = points.Last();
             
             // calculate velocity from accelerations and time
-            velocity += Physics.gravity * rb.gravityScale * Time.fixedDeltaTime;  // gravity
+            velocity += Physics.gravity * (rb.gravityScale * Time.fixedDeltaTime);  // gravity
             velocity = velocity * Mathf.Clamp01(1f - rb.drag * Time.fixedDeltaTime); // drag
             // calculate position from velocities
             newPoint += (velocity * Time.fixedDeltaTime);
-            
+
             points.Add(newPoint);
+
+            const int margin = 2;
+            if (i + margin >= trajectoryIndicator.positionCount)
+                continue;
+            if (Vector3.Distance(transform.position, newPoint) > 2*collider.radius)
+            {
+                if (Physics2D.OverlapCircle(newPoint, 0.01f))
+                {
+                    trajectoryIndicator.positionCount = i+margin;
+                }
+            }
         }
         return points.ToArray();
     }
