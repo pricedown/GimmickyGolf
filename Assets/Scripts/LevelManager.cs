@@ -9,23 +9,32 @@ public class LevelManager : MonoBehaviour
     public static LevelManager instance;
     public GameObject holeCompleteText;
     public TextMeshProUGUI strokeText;
+    public TextMeshProUGUI currentStrokesText;
 
-    private void Start()
+    public void Awake()
     {
-        if(instance == null)
+        DontDestroyOnLoad(this);
+        if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this);
         } else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
         ResetToNormal();
     }
+
     public void ResetToNormal()
     {
         holeCompleteText.SetActive(false);
         Time.timeScale = 1f;
+        if(GameObject.FindWithTag("Player") == null)
+        {
+            currentStrokesText.gameObject.SetActive(false);
+        } else
+        {
+            currentStrokesText.gameObject.SetActive(true);
+        }
     }
     public void HoleComplete(GameObject player)
     {
@@ -37,5 +46,9 @@ public class LevelManager : MonoBehaviour
         }
         strokeText.text = "Strokes: " + strokes + "\t\tBest: " + PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "Best", strokes);
         Time.timeScale = 0f; // Stop the scene
+    }
+    public void SetCurrentStrokes(int currentStrokes)
+    {
+        currentStrokesText.text = "Strokes: " + currentStrokes;
     }
 }

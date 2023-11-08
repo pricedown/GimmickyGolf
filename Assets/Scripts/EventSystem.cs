@@ -7,14 +7,14 @@ public class EventSystem : MonoBehaviour
     public static EventSystem instance;
     private void Start()
     {
+        DontDestroyOnLoad(this);
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this);
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 }
