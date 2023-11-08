@@ -42,7 +42,7 @@ public class BallMovement : MonoBehaviour
     {
         if (glued) rb.velocity = Vector2.zero;
         if (portalCD > 0) portalCD -= Time.deltaTime;
-        still = (rb.velocity.magnitude <= 0.05f);
+        still = (rb.velocity.magnitude <= 0.09f);
 
         if (still)
         {
