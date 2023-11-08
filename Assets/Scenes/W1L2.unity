@@ -1278,6 +1278,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bouncy Wall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6583742589075063965, guid: 45a7150e774eefa488b71d1fee3c9ed8, type: 3}
+      propertyPath: m_SortingOrder
+      value: -5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

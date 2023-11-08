@@ -19,7 +19,14 @@ public class Hole : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(Time.time - storedTime > timeDiff && !hasCompleted && collision.CompareTag("Player")) // Check if the ball has been in the hole for long enough
+        //Debug.Log(Time.time - storedTime > timeDiff);
+        /*if(Time.time - storedTime > timeDiff && !hasCompleted && collision.CompareTag("Player")) // Check if the ball has been in the hole for long enough
+        {
+            GameObject player = collision.gameObject;
+            LevelManager.instance.HoleComplete(player);
+            hasCompleted = true;
+        }*/
+        if(collision.CompareTag("Player") && collision.GetComponent<BallMovement>().still)
         {
             GameObject player = collision.gameObject;
             LevelManager.instance.HoleComplete(player);
