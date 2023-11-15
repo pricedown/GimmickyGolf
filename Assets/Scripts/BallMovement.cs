@@ -18,11 +18,13 @@ public class BallMovement : MonoBehaviour
     // duration: simulated foresight
     // step: roughness of simulation
     public float indicatorDuration = 5f;
-    
+
     [Header("Runtime")]
 
+    public int varMagStrength = 35;
     public int magnetStrength;
-    public bool magnetised = false;
+    public bool magnetisedA = false;
+    public bool magnetisedR = false;
     Vector3 magnetPosition;
     public LineRenderer pullbackIndicator, trajectoryIndicator;
     public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection, previousPos, initialPos;
@@ -72,13 +74,23 @@ public class BallMovement : MonoBehaviour
             //print(shotTime - Time.time);
         }
 
-        if(magnetised)
+        if(magnetisedA)
         {
             float distance = Vector3.Distance(magnetPosition, transform.position);
             Vector2 targetDirection = (magnetPosition - transform.position).normalized;
-            magnetStrength = (int)(1/distance*65);
+            //magnetStrength = (int)(1 / distance * varMagStrength);
+            magnetStrength = 35;
             rb.AddForce(new Vector2(targetDirection.x, targetDirection.y) * magnetStrength);
 
+        }
+        if (magnetisedR)
+        {
+            float distance = Vector3.Distance(magnetPosition, transform.position);
+            Vector2 targetDirection = (magnetPosition - transform.position).normalized;
+            magnetStrength = (int)(1 / distance * varMagStrength);
+            //magnetStrength = 40;
+            rb.AddForce(-1 * new Vector2(targetDirection.x, targetDirection.y) * magnetStrength);
+            
         }
     }
 
@@ -230,10 +242,15 @@ public class BallMovement : MonoBehaviour
         }
     }
 
-    public void setTarget(Vector3 position)
+    public void setTargetA(Vector3 position)
     {
         magnetPosition = position;
-        magnetised = true;
+        magnetisedA = true;
+    }
+    public void setTargetR(Vector3 position)
+    {
+        magnetPosition = position;
+        magnetisedR = true;
     }
 
     private void ChangeStrokes(int changeBy)
