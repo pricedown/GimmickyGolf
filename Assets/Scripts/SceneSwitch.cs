@@ -40,4 +40,8 @@ public class SceneSwitch : MonoBehaviour
             SwitchScene();
         }
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
