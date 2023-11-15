@@ -221,15 +221,12 @@ public class BallMovement : MonoBehaviour
         }
     }
 
-<<<<<<< HEAD
     public void setTarget(Vector3 position)
     {
         magnetPosition = position;
         magnetised = true;
     }
 
-
-=======
     private void ChangeStrokes(int changeBy)
     {
         if (Time.timeScale != 0)
@@ -238,5 +235,4 @@ public class BallMovement : MonoBehaviour
             LevelManager.instance.SetCurrentStrokes(strokeCount);
         }
     }
->>>>>>> b85b4b4e404970ccd9436752d541225b8596bbf6
 }
