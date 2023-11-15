@@ -21,6 +21,9 @@ public class BallMovement : MonoBehaviour
     
     [Header("Runtime")]
 
+    public int magnetStrength;
+    public bool magnetised = false;
+    Vector3 magnetPosition;
     public LineRenderer pullbackIndicator, trajectoryIndicator;
     public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection, previousPos, initialPos;
     public float power;
@@ -67,6 +70,15 @@ public class BallMovement : MonoBehaviour
             pullbackIndicator.enabled = false;
             trajectoryIndicator.enabled = false;
             //print(shotTime - Time.time);
+        }
+
+        if(magnetised)
+        {
+            float distance = Vector3.Distance(magnetPosition, transform.position);
+            Vector2 targetDirection = (magnetPosition - transform.position).normalized;
+            magnetStrength = (int)(1/distance*65);
+            rb.AddForce(new Vector2(targetDirection.x, targetDirection.y) * magnetStrength);
+
         }
     }
 
@@ -209,6 +221,15 @@ public class BallMovement : MonoBehaviour
         }
     }
 
+<<<<<<< HEAD
+    public void setTarget(Vector3 position)
+    {
+        magnetPosition = position;
+        magnetised = true;
+    }
+
+
+=======
     private void ChangeStrokes(int changeBy)
     {
         if (Time.timeScale != 0)
@@ -217,4 +238,5 @@ public class BallMovement : MonoBehaviour
             LevelManager.instance.SetCurrentStrokes(strokeCount);
         }
     }
+>>>>>>> b85b4b4e404970ccd9436752d541225b8596bbf6
 }
