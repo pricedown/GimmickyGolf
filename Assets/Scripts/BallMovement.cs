@@ -100,17 +100,17 @@ public class BallMovement : MonoBehaviour
         if (context.canceled && isClicked) // on release
         {
             isClicked = false;
-            if (still)
+            if (still && Time.timeScale != 0f)
             {
                 if (glued)
                 {
                     glued = false;
                     rb.isKinematic = false;
                 }
+                ChangeStrokes(1);
                 rb.AddForce(power * shotDirection);
                 shotTime = Time.time;
                 previousPos = transform.position;
-                ChangeStrokes(1);
             }// TODO: add cancelling of action
         }
     }
@@ -126,7 +126,7 @@ public class BallMovement : MonoBehaviour
 
     public void ResetPos(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && Time.timeScale != 0f)
         {
             transform.position = initialPos;
             Cancel(context);
@@ -190,12 +190,21 @@ public class BallMovement : MonoBehaviour
             const int margin = 2;
             if (i + margin >= trajectoryIndicator.positionCount)
                 continue;
+            
+            // ?only check if it's a certain distance away
             if (Vector3.Distance(transform.position, newPoint) > 2*collider.radius)
             {
+                /*
                 if (Physics2D.OverlapCircle(newPoint, collider.radius - 0.3f))
                 {
                     trajectoryIndicator.positionCount = i+margin;
-                }
+                }*/
+                // TODO: add filter for triggers in OverlapArea
+                Vector2 p1 = new Vector2(points.Last().x, points.Last().y + (collider.radius * 0.5f));
+                Vector2 p2 = new Vector2(newPoint.x, newPoint.y - (collider.radius * 0.5f));
+                
+                if (Physics2D.OverlapArea(p1, p2))
+                    trajectoryIndicator.positionCount = i+margin;
             }
         }
         return points.ToArray();
