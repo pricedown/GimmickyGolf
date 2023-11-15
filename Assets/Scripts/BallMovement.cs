@@ -180,7 +180,7 @@ public class BallMovement : MonoBehaviour
                 continue;
             if (Vector3.Distance(transform.position, newPoint) > 2*collider.radius)
             {
-                if (Physics2D.OverlapCircle(newPoint, 0.01f))
+                if (Physics2D.OverlapCircle(newPoint, collider.radius - 0.3f))
                 {
                     trajectoryIndicator.positionCount = i+margin;
                 }
