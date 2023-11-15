@@ -798,6 +798,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1928521755557812733, guid: 955684ce744563e468cd47fec38aa102, type: 3}
+      propertyPath: m_text
+      value: Level Select
+      objectReference: {fileID: 0}
+    - target: {fileID: 1948702457523342578, guid: 955684ce744563e468cd47fec38aa102, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2422627091571870518, guid: 955684ce744563e468cd47fec38aa102, type: 3}
       propertyPath: m_Name
       value: LevelManager
