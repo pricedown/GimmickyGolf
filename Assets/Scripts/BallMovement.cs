@@ -100,17 +100,17 @@ public class BallMovement : MonoBehaviour
         if (context.canceled && isClicked) // on release
         {
             isClicked = false;
-            if (still)
+            if (still && Time.timeScale != 0f)
             {
                 if (glued)
                 {
                     glued = false;
                     rb.isKinematic = false;
                 }
+                ChangeStrokes(1);
                 rb.AddForce(power * shotDirection);
                 shotTime = Time.time;
                 previousPos = transform.position;
-                ChangeStrokes(1);
             }// TODO: add cancelling of action
         }
     }
@@ -126,7 +126,7 @@ public class BallMovement : MonoBehaviour
 
     public void ResetPos(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && Time.timeScale != 0f)
         {
             transform.position = initialPos;
             Cancel(context);

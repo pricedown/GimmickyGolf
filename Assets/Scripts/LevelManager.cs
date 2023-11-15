@@ -53,12 +53,12 @@ public class LevelManager : MonoBehaviour
     }
     public void PauseUnpause()
     {
-        if(pausedScreen.activeSelf)
+        if(Time.timeScale == 0f)
         {
             Time.timeScale = 1f;
             pausedScreen.SetActive(false);
         }
-        else
+        else if (!holeCompleteText.activeSelf)
         {
             Time.timeScale = 0f;
             pausedScreen.SetActive(true);
