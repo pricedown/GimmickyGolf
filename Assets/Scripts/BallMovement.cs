@@ -36,6 +36,8 @@ public class BallMovement : MonoBehaviour
     public int strokeCount = 0;
     private Rigidbody2D rb;
     private CircleCollider2D collider;
+    
+    private float stillThreshold = 0.2f;
 
     private void Start()
     {
@@ -53,7 +55,7 @@ public class BallMovement : MonoBehaviour
     {
         if (glued) rb.velocity = Vector2.zero;
         if (portalCD > 0) portalCD -= Time.deltaTime;
-        still = (rb.velocity.magnitude <= 0.09f);
+        still = (rb.velocity.magnitude <= stillThreshold);
 
         if (still)
         {
