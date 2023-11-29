@@ -57,6 +57,7 @@ public class BallMovement : MonoBehaviour
         ChangeStrokes(0);
         LevelManager.instance.LoadPlayer();
     }
+    
     private void FixedUpdate()
     {
         if (glued) rb.velocity = Vector2.zero;
@@ -86,7 +87,7 @@ public class BallMovement : MonoBehaviour
             //print(shotTime - Time.time);
         }
 
-        if(magnetisedA)
+        if (magnetisedA)
         {
             float distance = Vector3.Distance(magnetPosition, transform.position);
             Vector2 targetDirection = (magnetPosition - transform.position).normalized;
@@ -101,7 +102,7 @@ public class BallMovement : MonoBehaviour
             Vector2 targetDirection = (magnetPosition - transform.position).normalized;
             magnetStrength = (int)(1 / distance * varMagStrength);
             //magnetStrength = 40;
-            rb.AddForce(-1 * new Vector2(targetDirection.x, targetDirection.y) * magnetStrength);
+            rb.AddForce(new Vector2(targetDirection.x, targetDirection.y) * (-1 * magnetStrength));
             
         }
     }
