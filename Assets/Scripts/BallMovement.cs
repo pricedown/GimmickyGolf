@@ -19,6 +19,8 @@ public class BallMovement : MonoBehaviour
     // duration: simulated foresight
     // step: roughness of simulation
     public float indicatorDuration = 5f;
+
+
     
     public float stillVelocity = 0.2f;
     public float stillDuration = 0.2f;
