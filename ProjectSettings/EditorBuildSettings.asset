@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 9219efa0689a9714895be34e606a45ba
-  - enabled: 1
+  - enabled: 0
+    path: Assets/Scenes/Test.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 0
     path: Assets/Scenes/Tests/CalebTest.unity
     guid: 0d8ae5549c143ca4c965c3831265ad06
   - enabled: 1
@@ -17,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/W1L1.unity
     guid: c5ec98178469cbc479db129d90f9df47
+  - enabled: 0
+    path: Assets/Scenes/~W1L2_OLD.unity
+    guid: f830643d4198805458b05aeaa12575d6
   - enabled: 1
     path: Assets/Scenes/W1L2.unity
     guid: 29ab8cb1b43daafc6ad44a3f80a18f49
@@ -26,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/W1L4.unity
     guid: e4de7eef6c1152b279786d4c6ab79684
+  - enabled: 0
+    path: Assets/Scenes/~W1L5.unity
+    guid: 72d1ccd17b73a4641a65be76e6467ceb
   m_configObjects: {}
