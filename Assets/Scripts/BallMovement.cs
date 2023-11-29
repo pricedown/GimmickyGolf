@@ -27,7 +27,7 @@ public class BallMovement : MonoBehaviour
 
     [Header("Runtime")]
 
-    public int varMagStrength;
+    public int varMagStrength = 35;
     public int magnetStrength;
     public bool magnetisedA = false;
     public bool magnetisedR = false;
@@ -92,7 +92,7 @@ public class BallMovement : MonoBehaviour
             float distance = Vector3.Distance(magnetPosition, transform.position);
             Vector2 targetDirection = (magnetPosition - transform.position).normalized;
             //magnetStrength = (int)(1 / distance * varMagStrength);
-            magnetStrength = varMagStrength;
+            magnetStrength = 35;
             rb.AddForce(new Vector2(targetDirection.x, targetDirection.y) * magnetStrength);
 
         }
@@ -101,13 +101,8 @@ public class BallMovement : MonoBehaviour
             float distance = Vector3.Distance(magnetPosition, transform.position);
             Vector2 targetDirection = (magnetPosition - transform.position).normalized;
             magnetStrength = (int)(1 / distance * varMagStrength);
-<<<<<<< HEAD
-            //magnetStrength = varMagnetStrength;
-            rb.AddForce(-1 * new Vector2(targetDirection.x, targetDirection.y) * magnetStrength);
-=======
             //magnetStrength = 40;
             rb.AddForce(new Vector2(targetDirection.x, targetDirection.y) * (-1 * magnetStrength));
->>>>>>> 7b30f7fd232f45161ebb641786c8ae102f2b5c75
             
         }
     }
