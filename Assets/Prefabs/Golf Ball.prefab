@@ -304,6 +304,8 @@ MonoBehaviour:
   maxPower: 1106
   drawForce: 2000
   indicatorDuration: 5
+  magnetStrength: 0
+  magnetised: 0
   pullbackIndicator: {fileID: 0}
   trajectoryIndicator: {fileID: 0}
   relativeMousePos: {x: 0, y: 0}
@@ -321,6 +323,7 @@ MonoBehaviour:
   cursorIndicatorPrefab: {fileID: 6860199488392732777, guid: 518245c922a193e40a1730aa3474f89d, type: 3}
   cam: {fileID: 0}
   strokeCount: 0
+  shotTime: 0
 --- !u!114 &3638383410899674423
 MonoBehaviour:
   m_ObjectHideFlags: 0
