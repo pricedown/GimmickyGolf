@@ -2236,17 +2236,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 955684ce744563e468cd47fec38aa102, type: 3}
---- !u!114 &1681322656 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 47450112915858060, guid: 955684ce744563e468cd47fec38aa102, type: 3}
-  m_PrefabInstance: {fileID: 1681322655}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22acaec4158ea034fa7d2b90dcb83afa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1711109726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2463,6 +2452,7 @@ GameObject:
   - component: {fileID: 1954374190}
   - component: {fileID: 1954374189}
   - component: {fileID: 1954374188}
+  - component: {fileID: 1954374191}
   m_Layer: 5
   m_Name: Reset Scores
   m_TagString: Untagged
@@ -2534,8 +2524,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1681322656}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
+      - m_Target: {fileID: 1954374191}
+        m_TargetAssemblyTypeName: ScoreReset, Assembly-CSharp
         m_MethodName: ResetScores
         m_Mode: 1
         m_Arguments:
@@ -2584,6 +2574,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1954374186}
   m_CullTransparentMesh: 1
+--- !u!114 &1954374191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954374186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1510c2b506894046bde009b3cd32412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
