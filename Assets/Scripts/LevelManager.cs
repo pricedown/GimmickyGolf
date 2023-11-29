@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     public GameObject holeCompleteText;
     public TextMeshProUGUI strokeText;
     public TextMeshProUGUI currentStrokesText;
+    public TextMeshProUGUI allStrokesText;
     public GameObject pausedScreen;
 
     public void Start()
@@ -61,7 +62,43 @@ public class LevelManager : MonoBehaviour
         else if (!holeCompleteText.activeSelf)
         {
             Time.timeScale = 0f;
+            string level = "W1L1";
+            allStrokesText.text = "";
+            while (SceneUtility.GetBuildIndexByScenePath(level) != -1)
+            {
+                if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name + "Best", 0) != 0)
+                {
+                    allStrokesText.text += PlayerPrefs.GetInt(level + "Best", 0) + "\n";
+                }
+                else
+                {
+                    allStrokesText.text += "X\n";
+                }
+                level = GetNextLevel(level);
+            }
             pausedScreen.SetActive(true);
+        }
+    }
+    public string GetNextLevel(string level)
+    {
+        string currentLevel = level;
+        string numChar = currentLevel[currentLevel.Length - 1] + "";
+        string partString = currentLevel.Substring(0, currentLevel.Length - 1);
+        int num = int.Parse(numChar) + 1;
+        if (num == 1)
+        {
+            numChar = currentLevel[currentLevel.Length - 2] + "" + currentLevel[currentLevel.Length - 1];
+            partString = currentLevel.Substring(0, currentLevel.Length - 2);
+        }
+        num = int.Parse(numChar) + 1;
+        string nextLevel = partString + num;
+        if (SceneUtility.GetBuildIndexByScenePath(nextLevel) != -1)
+        {
+            return nextLevel;
+        }
+        else
+        {
+            return "0";
         }
     }
 }
