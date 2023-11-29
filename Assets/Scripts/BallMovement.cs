@@ -20,8 +20,6 @@ public class BallMovement : MonoBehaviour
     // step: roughness of simulation
     public float indicatorDuration = 5f;
 
-
-    
     public float stillVelocity = 0.2f;
     public float stillDuration = 0.2f;
 
