@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEngine.Serialization;
 
 public class BallMovement : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class BallMovement : MonoBehaviour
     // duration: simulated foresight
     // step: roughness of simulation
     public float indicatorDuration = 5f;
+    
+    public float stillVelocity = 0.2f;
+    public float stillDuration = 0.2f;
 
     [Header("Runtime")]
 
@@ -37,7 +41,7 @@ public class BallMovement : MonoBehaviour
     private Rigidbody2D rb;
     private CircleCollider2D collider;
     
-    private float stillThreshold = 0.2f;
+    private float lastMoved;
 
     private void Start()
     {
@@ -55,7 +59,11 @@ public class BallMovement : MonoBehaviour
     {
         if (glued) rb.velocity = Vector2.zero;
         if (portalCD > 0) portalCD -= Time.deltaTime;
-        still = (rb.velocity.magnitude <= stillThreshold);
+        
+        if (rb.velocity.magnitude > stillVelocity)
+            lastMoved = Time.time;
+        
+        still = (Time.time - lastMoved >= stillDuration);
 
         if (still)
         {
