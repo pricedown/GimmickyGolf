@@ -37,5 +37,9 @@ EditorBuildSettings:
     guid: 72d1ccd17b73a4641a65be76e6467ceb
   - enabled: 1
     path: Assets/Scenes/W1L5.unity
+<<<<<<< Updated upstream
     guid: b8c3e5251b8740f43bc4e9356a74bec5
+=======
+    guid: 6fb3024e4aacba04b9b9f4f0610387fb
+>>>>>>> Stashed changes
   m_configObjects: {}
