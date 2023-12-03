@@ -6,7 +6,7 @@ using UnityEngine;
 public class GravBlock : MonoBehaviour
 {
     public int rot = 1;
-    public GameObject arrowPrefab;
+    /**public GameObject arrowPrefab;
 
     private void Start()
     {
@@ -23,6 +23,7 @@ public class GravBlock : MonoBehaviour
             }
         }
     }
+    **/
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var FORCE_OF_GRAVITY = Physics.gravity.magnitude;
