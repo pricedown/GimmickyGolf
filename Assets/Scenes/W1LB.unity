@@ -12021,6 +12021,10 @@ PrefabInstance:
       value: Golf Ball
       objectReference: {fileID: 0}
     - target: {fileID: 8909765486248684990, guid: d9c5dc411fbca714d8c9588eab50d154, type: 3}
+      propertyPath: m_Parameters.numCapVertices
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8909765486248684990, guid: d9c5dc411fbca714d8c9588eab50d154, type: 3}
       propertyPath: m_Positions.Array.data[48].z
       value: 1
       objectReference: {fileID: 0}
