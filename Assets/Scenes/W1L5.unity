@@ -22398,10 +22398,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4106857796016179421, guid: d9c5dc411fbca714d8c9588eab50d154, type: 3}
-      propertyPath: varMagStrength
-      value: 88
-      objectReference: {fileID: 0}
     - target: {fileID: 4285229042379576299, guid: d9c5dc411fbca714d8c9588eab50d154, type: 3}
       propertyPath: m_LocalPosition.x
       value: -16.76
