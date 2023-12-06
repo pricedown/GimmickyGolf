@@ -54,6 +54,7 @@ public class BallMovement : MonoBehaviour
         initialPos = transform.position;
         ChangeStrokes(0);
         LevelManager.instance.LoadPlayer();
+        ResetGravity();
     }
     
     private void FixedUpdate()
@@ -156,6 +157,7 @@ public class BallMovement : MonoBehaviour
             ChangeStrokes(-1 * strokeCount);
             rb.velocity = Vector2.zero;
             rb.inertia = 0;
+            ResetGravity();
         }
     }
     public void Pause(InputAction.CallbackContext context)
@@ -271,5 +273,12 @@ public class BallMovement : MonoBehaviour
             strokeCount += changeBy;
             LevelManager.instance.SetCurrentStrokes(strokeCount);
         }
+    }
+    public void ResetGravity()
+    {
+        var FORCE_OF_GRAVITY = Physics.gravity.magnitude;
+        var FORCE_OF_GRAVITY2D = Physics2D.gravity.magnitude;
+        Physics.gravity = new Vector3(0, -FORCE_OF_GRAVITY, 0);
+        Physics2D.gravity = new Vector2(0, -FORCE_OF_GRAVITY2D);
     }
 }

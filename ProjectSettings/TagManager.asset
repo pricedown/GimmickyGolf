@@ -8,6 +8,7 @@ TagManager:
   - Water
   - Glue
   - Magnet
+  - CameraCornerWall
   layers:
   - Default
   - TransparentFX
