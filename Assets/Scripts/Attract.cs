@@ -19,7 +19,10 @@ public class Attract : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        var ballsScript = collision.GetComponent<BallMovement>();
-        ballsScript.magnetisedA = false;
+        if (collision.CompareTag("Player"))
+        {
+            var ballsScript = collision.GetComponent<BallMovement>();
+            ballsScript.magnetisedA = false;
+        }
     }
 }

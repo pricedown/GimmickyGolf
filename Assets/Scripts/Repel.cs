@@ -19,7 +19,10 @@ public class Repel : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        var ballsScript = collision.GetComponent<BallMovement>();
-        ballsScript.magnetisedR = false;
+        if (collision.CompareTag("Player"))
+        {
+            var ballsScript = collision.GetComponent<BallMovement>();
+            ballsScript.magnetisedR = false;
+        }
     }
 }
