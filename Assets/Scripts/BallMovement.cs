@@ -40,6 +40,8 @@ public class BallMovement : MonoBehaviour
     public int strokeCount = 0;
     private Rigidbody2D rb;
     private CircleCollider2D collider;
+    public Color stillColor, moveColor, pullColor;
+    public SpriteRenderer ballRender;
     
     private float lastMoved;
 
@@ -72,15 +74,21 @@ public class BallMovement : MonoBehaviour
             if (isClicked)
             {
                 // Set up for a Stroke
+                
                 Vector2 drawback = relativeMousePos - storedPos;
                 UpdateShot(drawback);
-
+                ballRender.color = pullColor;
                 pullbackIndicator.enabled = true;
                 trajectoryIndicator.enabled = true;
                 pullbackIndicator.SetPositions(PullbackLine());
                 trajectoryIndicator.SetPositions(TrajectoryLine());
             }
+            else
+            {
+                ballRender.color = stillColor;
+            }
         } else {
+            ballRender.color = moveColor;
             pullbackIndicator.enabled = false;
             trajectoryIndicator.enabled = false;
             //print(shotTime - Time.time);
