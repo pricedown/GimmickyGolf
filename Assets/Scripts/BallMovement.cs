@@ -31,7 +31,7 @@ public class BallMovement : MonoBehaviour
     public bool magnetisedR = false;
     Vector3 magnetPosition;
     public LineRenderer pullbackIndicator, trajectoryIndicator;
-    public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection, previousPos, initialPos;
+    public Vector2 relativeMousePos, storedPos, mousePos, screenSize, shotDirection, previousPos, initialPos, storedGravity2D;
     public float power;
     public bool isClicked = false, still, glued = false;
     public float portalCD;
@@ -42,6 +42,7 @@ public class BallMovement : MonoBehaviour
     private CircleCollider2D collider;
     public Color stillColor, moveColor, pullColor;
     public SpriteRenderer ballRender;
+    public Vector3 storedGravity3D;
     
     private float lastMoved;
 
@@ -141,6 +142,8 @@ public class BallMovement : MonoBehaviour
                 }
                 ChangeStrokes(1);
                 rb.AddForce(power * shotDirection);
+                storedGravity2D = Physics2D.gravity;
+                storedGravity3D = Physics.gravity;
                 shotTime = Time.time;
                 previousPos = transform.position;
             }// TODO: add cancelling of action
@@ -257,6 +260,8 @@ public class BallMovement : MonoBehaviour
             {
                 ChangeStrokes(-1 * strokeCount);
             }
+            Physics2D.gravity = storedGravity2D;
+            Physics.gravity = storedGravity3D;
             transform.position = previousPos;
             rb.velocity = Vector2.zero;
             rb.inertia = 0;
