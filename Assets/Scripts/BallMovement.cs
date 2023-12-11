@@ -22,6 +22,10 @@ public class BallMovement : MonoBehaviour
 
     public float stillVelocity = 0.2f;
     public float stillDuration = 0.2f;
+    public bool rollingFlat = false;
+    public float rollingDuration = 0.05f;
+    public float rollingVelocity = 2f;
+    public float lastRolling;
 
     [Header("Runtime")]
 
@@ -59,9 +63,27 @@ public class BallMovement : MonoBehaviour
         LevelManager.instance.LoadPlayer();
         ResetGravity();
     }
-    
+
+    private bool isRolling()
+    {
+        float dotProduct = Vector3.Dot(rb.velocity.normalized, Physics2D.gravity.normalized);
+        float threshold = 0.1f;
+        return (Mathf.Abs(dotProduct) < threshold && rb.velocity.magnitude <= rollingVelocity);
+    }
+
     private void FixedUpdate()
     {
+        // reduce downtime when ball is rolling flat
+        if (!isRolling())
+            lastRolling = Time.time;
+        rollingFlat = (Time.time - lastRolling >= rollingDuration);
+
+        if (rollingFlat)
+        {
+            rb.velocity *= 0.965f; 
+            Debug.Log("slowing down");
+        }
+
         if (glued)
         {
             rb.velocity = Vector2.zero;

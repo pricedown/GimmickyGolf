@@ -408,6 +408,10 @@ MonoBehaviour:
   indicatorDuration: 5
   stillVelocity: 0.2
   stillDuration: 0.2
+  rollingFlat: 0
+  rollingDuration: 0.16
+  rollingVelocity: 2.01
+  lastRolling: 0
   varMagStrength: 88
   magnetStrength: 0
   magnetisedA: 0
@@ -421,6 +425,7 @@ MonoBehaviour:
   shotDirection: {x: 0, y: 0}
   previousPos: {x: 0, y: 0}
   initialPos: {x: 0, y: 0}
+  storedGravity2D: {x: 0, y: 0}
   power: 0
   isClicked: 0
   still: 0
@@ -433,6 +438,7 @@ MonoBehaviour:
   moveColor: {r: 1, g: 0, b: 0, a: 1}
   pullColor: {r: 0.148332, g: 1, b: 0, a: 1}
   ballRender: {fileID: 6768998269890272652}
+  storedGravity3D: {x: 0, y: 0, z: 0}
   shotTime: 0
 --- !u!114 &3638383410899674423
 MonoBehaviour:
