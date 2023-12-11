@@ -34,6 +34,7 @@ public class LevelManager : MonoBehaviour
         currentStrokesText.gameObject.SetActive(false);
         allStrokes.SetActive(false);
         Time.timeScale = 1f;
+        StopAllCoroutines();
     }
     public void HoleComplete(GameObject player)
     {
@@ -140,7 +141,8 @@ public class LevelManager : MonoBehaviour
             Vector3 temp = new Vector3(-25f, Random.Range(-10f, 10f), 0);
             Instantiate(cloud, temp, Quaternion.identity);
             yield return new WaitForSeconds(time);
-            time = Random.Range(4f, 7.5f);
+            time = Random.Range(5f, 7.5f);
         }
     }
+    
 }
