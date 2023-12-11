@@ -11,12 +11,39 @@ public class PortalController : MonoBehaviour
     public GameObject otherPortal;
     public Vector2 offSetMult;
 
-    [System.Obsolete]
+    public float emissionRateMultiplier = 25f; // Adjust as needed
+
+    private ParticleSystem portalParticleSystem;
+
     private void Start()
     {
-        gameObject.GetComponentInChildren<ParticleSystem>().emissionRate = 25 * transform.localScale.y;
-        gameObject.GetComponentInChildren<ParticleSystem>().startColor = GetComponent<SpriteRenderer>().color;
-        otherPortal = GameObject.FindGameObjectsWithTag("Portal").Where(x => x.GetComponent<PortalController>().portalID == portalID && x != this.gameObject).FirstOrDefault();
+        portalParticleSystem = GetComponentInChildren<ParticleSystem>();
+        InitializePortal();
+        FindOtherPortal();
+    }
+
+    private void InitializePortal()
+    {
+        if (portalParticleSystem != null)
+        {
+            portalParticleSystem.emissionRate = emissionRateMultiplier * transform.localScale.y;
+            portalParticleSystem.startColor = GetComponent<SpriteRenderer>().color;
+        }
+        else
+        {
+            Debug.LogError("Particle system not found!");
+        }
+    }
+
+    private void FindOtherPortal()
+    {
+        var portals = GameObject.FindGameObjectsWithTag("Portal");
+        otherPortal = portals.FirstOrDefault(x => x.GetComponent<PortalController>()?.portalID == portalID && x != gameObject);
+
+        if (otherPortal == null)
+        {
+            Debug.LogError("Other portal not found!");
+        }
     }
     public void Warp(GameObject target)
     {
