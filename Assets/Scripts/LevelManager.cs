@@ -27,26 +27,6 @@ public class LevelManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public void StartCloud()
-    {
-        for(int i = 0; i < 3; i++)
-        {
-            Vector3 temp = new Vector3(Random.Range(-20f, 20f), Random.Range(-10f, 10f), 0);
-            Instantiate(cloud, temp, Quaternion.identity);
-        }
-        StartCoroutine("CloudSummon", 3f);
-    }
-    IEnumerator CloudSummon(float time)
-    {
-        while(true)
-        {
-            Vector3 temp = new Vector3(-25f, Random.Range(-10f, 10f), 0);
-            Instantiate(cloud, temp, Quaternion.identity);
-            yield return new WaitForSeconds(time);
-            time = Random.Range(4f, 7.5f);
-        }
-    }
-
     public void ResetToNormal()
     {
         holeCompleteText.SetActive(false);
@@ -142,6 +122,25 @@ public class LevelManager : MonoBehaviour
         else
         {
             return "0";
+        }
+    }
+    public void StartCloud()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            Vector3 temp = new Vector3(Random.Range(-20f, 20f), Random.Range(-10f, 10f), 0);
+            Instantiate(cloud, temp, Quaternion.identity);
+        }
+        StartCoroutine("CloudSummon", 3f);
+    }
+    IEnumerator CloudSummon(float time)
+    {
+        while (true)
+        {
+            Vector3 temp = new Vector3(-25f, Random.Range(-10f, 10f), 0);
+            Instantiate(cloud, temp, Quaternion.identity);
+            yield return new WaitForSeconds(time);
+            time = Random.Range(4f, 7.5f);
         }
     }
 }
