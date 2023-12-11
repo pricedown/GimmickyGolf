@@ -870,6 +870,7 @@ MonoBehaviour:
   allStrokesText: {fileID: 8541809913713428592}
   allStrokes: {fileID: 7540137019694582375}
   pausedScreen: {fileID: 1610464607449990612}
+  cloud: {fileID: 1338031819788956897, guid: b7fac610a5d8d9e42b1108d026bb1bb8, type: 3}
 --- !u!1 &3630966691189956206
 GameObject:
   m_ObjectHideFlags: 0

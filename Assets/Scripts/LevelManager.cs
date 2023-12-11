@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     public TextMeshProUGUI allStrokesText;
     public GameObject allStrokes;
     public GameObject pausedScreen;
+    public GameObject cloud;
 
     public void Start()
     {
@@ -24,6 +25,17 @@ public class LevelManager : MonoBehaviour
         } else
         {
             Destroy(gameObject);
+        }
+    }
+
+    IEnumerator CloudSummon(float time)
+    {
+        while(true)
+        {
+            Vector3 temp = new Vector3(-25f, Random.Range(-10f, 10f), 0);
+            Instantiate(cloud, temp, Quaternion.identity);
+            yield return new WaitForSeconds(time);
+            time = Random.Range(5, 10);
         }
     }
 
@@ -55,6 +67,7 @@ public class LevelManager : MonoBehaviour
     public void LoadPlayer()
     {
         currentStrokesText.gameObject.SetActive(true);
+        StartCoroutine("CloudSummon", 3);
     }
     public void PauseUnpause()
     {
