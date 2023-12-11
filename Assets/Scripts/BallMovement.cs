@@ -62,7 +62,11 @@ public class BallMovement : MonoBehaviour
     
     private void FixedUpdate()
     {
-        if (glued) rb.velocity = Vector2.zero;
+        if (glued)
+        {
+            rb.velocity = Vector2.zero;
+            rb.rotation = 0;
+        }
         if (portalCD > 0) portalCD -= Time.deltaTime;
         
         if (rb.velocity.magnitude > stillVelocity)
@@ -236,8 +240,8 @@ public class BallMovement : MonoBehaviour
                     trajectoryIndicator.positionCount = i+margin;
                 }*/
                 // TODO: add filter for triggers in OverlapArea
-                Vector2 p1 = new Vector2(points.Last().x, points.Last().y + (collider.radius * 0.5f));
-                Vector2 p2 = new Vector2(newPoint.x, newPoint.y - (collider.radius * 0.5f));
+                Vector2 p1 = new Vector2(points.Last().x, points.Last().y + (collider.radius * 0.51f));
+                Vector2 p2 = new Vector2(newPoint.x, newPoint.y - (collider.radius * 0.51f));
                 
                 if (Physics2D.OverlapArea(p1, p2))
                     trajectoryIndicator.positionCount = i+margin;
