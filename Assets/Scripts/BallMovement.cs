@@ -158,7 +158,7 @@ public class BallMovement : MonoBehaviour
         if (context.canceled && isClicked) // on release
         {
             isClicked = false;
-            if (still && Time.timeScale != 0f)
+            if (still && Time.timeScale != 0f && power > 0)
             {
                 if (glued)
                 {
