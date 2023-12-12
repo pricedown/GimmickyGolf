@@ -12265,14 +12265,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6883040790356491661, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
-      propertyPath: m_Color.b
-      value: 0.6841278
-      objectReference: {fileID: 0}
-    - target: {fileID: 6883040790356491661, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8434120309674671666, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
       propertyPath: m_Name
       value: Glue
@@ -19943,14 +19935,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6883040790356491661, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
-      propertyPath: m_Color.b
-      value: 0.6841278
-      objectReference: {fileID: 0}
-    - target: {fileID: 6883040790356491661, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8434120309674671666, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
       propertyPath: m_Name
       value: Glue (1)
@@ -21523,7 +21507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4285229042379576299, guid: d9c5dc411fbca714d8c9588eab50d154, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.7
+      value: -9.040959
       objectReference: {fileID: 0}
     - target: {fileID: 4285229042379576299, guid: d9c5dc411fbca714d8c9588eab50d154, type: 3}
       propertyPath: m_LocalPosition.z

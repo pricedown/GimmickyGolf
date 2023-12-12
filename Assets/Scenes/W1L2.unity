@@ -17397,7 +17397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6348849432322216510, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -9.259999
+      value: -9.13
       objectReference: {fileID: 0}
     - target: {fileID: 6348849432322216510, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -17432,16 +17432,8 @@ PrefabInstance:
       value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 6883040790356491661, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
-      propertyPath: m_Color.b
-      value: 0.6841278
-      objectReference: {fileID: 0}
-    - target: {fileID: 6883040790356491661, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6883040790356491661, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
       propertyPath: m_SortingOrder
-      value: -1
+      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8434120309674671666, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
       propertyPath: m_Name
@@ -17545,7 +17537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6348849432322216510, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.12
+      value: -12.22
       objectReference: {fileID: 0}
     - target: {fileID: 6348849432322216510, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -17581,14 +17573,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6348849432322216510, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6883040790356491661, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
-      propertyPath: m_Color.b
-      value: 0.6841278
-      objectReference: {fileID: 0}
-    - target: {fileID: 6883040790356491661, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
-      propertyPath: m_Color.g
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8434120309674671666, guid: c0baef303657bd44baab2e60ec7cb91d, type: 3}
