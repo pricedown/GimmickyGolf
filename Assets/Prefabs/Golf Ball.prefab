@@ -71,9 +71,9 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: -1
+  m_SortingLayerID: 1921533807
+  m_SortingLayer: -1
+  m_SortingOrder: 0
   m_Time: 0.1
   m_PreviewTimeScale: 1
   m_Parameters:
@@ -216,8 +216,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1126591219
-  m_SortingLayer: 2
+  m_SortingLayerID: 1921533807
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -325,8 +325,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 6021809408730380314}
   - {fileID: 6358292026398779218}
+  - {fileID: 6021809408730380314}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1001598908014745914
@@ -737,8 +737,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1126591219
-  m_SortingLayer: 2
+  m_SortingLayerID: 1921533807
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -861,7 +861,7 @@ GameObject:
   - component: {fileID: 6358292026398779218}
   - component: {fileID: 6768998269890272652}
   m_Layer: 0
-  m_Name: Golf Ball (1)
+  m_Name: Golf Ball Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -920,9 +920,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1921533807
+  m_SortingLayer: -1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 080712d6666421a4684cb3bcdd4d5330, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
