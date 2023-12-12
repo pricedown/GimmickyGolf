@@ -8,7 +8,7 @@ public class Cloud : MonoBehaviour
     float screenWidth;
     private void Start()
     {
-        speed = Random.Range(0.03f, 0.05f);
+        speed = Random.Range(0.025f, 0.05f);
         screenWidth = 25f;
     }
     private void FixedUpdate()

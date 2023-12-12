@@ -323,7 +323,18 @@ public class BallMovement : MonoBehaviour
     {
         if (Time.time - lastParticle > 0.2f)
         {
-            transform.GetChild(1).GetChild(3).GetComponent<ParticleSystem>().Play();
+			var particleSystem = transform.GetChild(1).GetChild(3).GetComponent<ParticleSystem>();
+			
+			ContactPoint2D contactPoint = collision.contacts[0];
+
+            Vector2 relativeVelocity = collision.relativeVelocity;
+            Vector2 collisionNormal = contactPoint.normal;
+            float normalVelocity = Vector2.Dot(relativeVelocity, collisionNormal);
+
+			particleSystem.startSize = normalVelocity / 15f;
+
+			particleSystem.startSize = Mathf.Clamp(particleSystem.startSize, 0, 1);
+           	particleSystem.Play();
             lastParticle = Time.time;
         }
     }
