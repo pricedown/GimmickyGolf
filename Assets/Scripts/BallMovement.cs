@@ -320,4 +320,8 @@ public class BallMovement : MonoBehaviour
         Physics.gravity = new Vector3(0, -FORCE_OF_GRAVITY, 0);
         Physics2D.gravity = new Vector2(0, -FORCE_OF_GRAVITY2D);
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        transform.GetChild(1).GetChild(3).GetComponent<ParticleSystem>().Play();
+    }
 }
