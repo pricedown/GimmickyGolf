@@ -81,7 +81,6 @@ public class BallMovement : MonoBehaviour
         if (rollingFlat)
         {
             rb.velocity *= 0.965f; 
-            Debug.Log("slowing down");
         }
 
         if (glued)
@@ -262,8 +261,8 @@ public class BallMovement : MonoBehaviour
                     trajectoryIndicator.positionCount = i+margin;
                 }*/
                 // TODO: add filter for triggers in OverlapArea
-                Vector2 p1 = new Vector2(points.Last().x, points.Last().y + (collider.radius * 0.51f));
-                Vector2 p2 = new Vector2(newPoint.x, newPoint.y - (collider.radius * 0.51f));
+                Vector2 p1 = new Vector2(points.Last().x, points.Last().y + (collider.radius * 0.568f));
+                Vector2 p2 = new Vector2(newPoint.x, newPoint.y - (collider.radius * 0.568f));
                 
                 if (Physics2D.OverlapArea(p1, p2))
                     trajectoryIndicator.positionCount = i+margin;
