@@ -49,6 +49,7 @@ public class BallMovement : MonoBehaviour
     public Vector3 storedGravity3D;
     
     private float lastMoved;
+    private float lastParticle;
 
     private void Start()
     {
@@ -59,6 +60,7 @@ public class BallMovement : MonoBehaviour
         trajectoryIndicator = GameObject.Find("Trajectory").GetComponent<LineRenderer>();
         screenSize = new Vector2(Screen.width, Screen.height);
         initialPos = transform.position;
+        lastParticle = Time.time - 0.5f;
         ChangeStrokes(0);
         LevelManager.instance.LoadPlayer();
         ResetGravity();
@@ -319,6 +321,10 @@ public class BallMovement : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        transform.GetChild(1).GetChild(3).GetComponent<ParticleSystem>().Play();
+        if (Time.time - lastParticle > 0.2f)
+        {
+            transform.GetChild(1).GetChild(3).GetComponent<ParticleSystem>().Play();
+            lastParticle = Time.time;
+        }
     }
 }
