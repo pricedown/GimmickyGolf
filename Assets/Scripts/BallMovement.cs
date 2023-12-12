@@ -238,13 +238,13 @@ public class BallMovement : MonoBehaviour
         
         for (int i = 0; i < trajectoryIndicator.positionCount; i++)
         {
-            Vector3 newPoint = points.Last();
+            Vector3 lastPoint = points.Last();
             
             // calculate velocity from accelerations and time
             velocity += Physics.gravity * (rb.gravityScale * Time.fixedDeltaTime);  // gravity
             velocity = velocity * Mathf.Clamp01(1f - rb.drag * Time.fixedDeltaTime); // drag
             // calculate position from velocities
-            newPoint += (velocity * Time.fixedDeltaTime);
+            Vector3 newPoint = lastPoint + (velocity * Time.fixedDeltaTime);
 
             points.Add(newPoint);
 
@@ -261,10 +261,8 @@ public class BallMovement : MonoBehaviour
                     trajectoryIndicator.positionCount = i+margin;
                 }*/
                 // TODO: add filter for triggers in OverlapArea
-                Vector2 p1 = new Vector2(points.Last().x, points.Last().y + (collider.radius * 0.568f));
-                Vector2 p2 = new Vector2(newPoint.x, newPoint.y - (collider.radius * 0.568f));
                 
-                if (Physics2D.OverlapArea(p1, p2))
+                if (Physics2D.OverlapCircle(newPoint, collider.radius))
                     trajectoryIndicator.positionCount = i+margin;
             }
         }
