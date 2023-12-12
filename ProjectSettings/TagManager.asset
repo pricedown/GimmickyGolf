@@ -46,6 +46,9 @@ TagManager:
   - name: Background
     uniqueID: 2644980063
     locked: 0
+  - name: Ball
+    uniqueID: 1921533807
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
