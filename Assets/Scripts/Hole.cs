@@ -10,6 +10,12 @@ public class Hole : MonoBehaviour
     private float storedTime;
     private bool hasCompleted = false;
     private bool flagRising = false;
+    private Vector3 startLocation;
+
+    private void Start()
+    {
+        startLocation = transform.GetChild(2).GetChild(0).transform.localPosition;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -33,6 +39,14 @@ public class Hole : MonoBehaviour
             GameObject player = collision.gameObject;
             LevelManager.instance.HoleComplete(player);
             hasCompleted = true;
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            transform.GetChild(2).GetChild(0).transform.localPosition = startLocation;
+            flagRising = false;
         }
     }
     private void Update()
