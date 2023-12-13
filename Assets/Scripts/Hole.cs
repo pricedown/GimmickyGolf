@@ -40,7 +40,7 @@ public class Hole : MonoBehaviour
         if(flagRising)
         {
             var flag = transform.GetChild(2).GetChild(0).transform;
-            flag.transform.localPosition += new Vector3(0, Time.deltaTime, 0);
+            flag.transform.localPosition += new Vector3(0, Time.deltaTime * 1.75f, 0);
             if (flag.transform.localPosition.y >= 0.39f)
             {
                 flagRising = false;
