@@ -11,6 +11,7 @@ public class Hole : MonoBehaviour
     private bool hasCompleted = false;
     private bool flagRising = false;
     private Vector3 startLocation;
+    private GameObject player;
 
     private void Start()
     {
@@ -21,24 +22,9 @@ public class Hole : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            player = collision.gameObject;
             flagRising = true;
             storedTime = Time.time; // Get time the ball gets in the hole
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        //Debug.Log(Time.time - storedTime > timeDiff);
-        /*if(Time.time - storedTime > timeDiff && !hasCompleted && collision.CompareTag("Player")) // Check if the ball has been in the hole for long enough
-        {
-            GameObject player = collision.gameObject;
-            LevelManager.instance.HoleComplete(player);
-            hasCompleted = true;
-        }*/
-        if(collision.CompareTag("Player") && collision.GetComponent<BallMovement>().still)
-        {
-            GameObject player = collision.gameObject;
-            LevelManager.instance.HoleComplete(player);
-            hasCompleted = true;
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -59,6 +45,7 @@ public class Hole : MonoBehaviour
             {
                 flagRising = false;
                 flag.transform.localPosition = new Vector3(2.3f, 0.39f, 0);
+                LevelManager.instance.HoleComplete(player);
             }
         }
     }
