@@ -18,13 +18,15 @@ public class GravBlock : MonoBehaviour
         var FORCE_OF_GRAVITY2D = Physics2D.gravity.magnitude;
         if (collision.CompareTag("Player"))
         {
-            switch(rot)
+            Physics.gravity = new Vector3(Mathf.Cos(rot * Mathf.Deg2Rad), Mathf.Sin(rot * Mathf.Deg2Rad), 0) * FORCE_OF_GRAVITY;
+            Physics2D.gravity = new Vector2(Mathf.Cos(rot * Mathf.Deg2Rad), Mathf.Sin(rot * Mathf.Deg2Rad)) * FORCE_OF_GRAVITY2D;
+            /*switch (rot)
             {
                 case 0: Physics.gravity = new Vector3(FORCE_OF_GRAVITY, 0, 0); Physics2D.gravity = new Vector2(FORCE_OF_GRAVITY2D, 0);  break;
                 case 270: Physics.gravity = new Vector3(0, -FORCE_OF_GRAVITY, 0); Physics2D.gravity = new Vector2(0, -FORCE_OF_GRAVITY2D); break;
                 case 180: Physics.gravity = new Vector3(-FORCE_OF_GRAVITY, 0, 0); Physics2D.gravity = new Vector2(-FORCE_OF_GRAVITY2D, 0); break;
                 case 90: Physics.gravity = new Vector3(0, FORCE_OF_GRAVITY, 0); Physics2D.gravity = new Vector2(0, FORCE_OF_GRAVITY2D); break;
-            }
+            }*/
         }
     }
 }
