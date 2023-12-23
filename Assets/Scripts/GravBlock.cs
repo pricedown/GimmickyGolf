@@ -10,6 +10,7 @@ public class GravBlock : MonoBehaviour
     private void Start()
     {
         rot = gameObject.transform.rotation.eulerAngles.z;
+        rot *= Mathf.Deg2Rad;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -18,8 +19,8 @@ public class GravBlock : MonoBehaviour
         var FORCE_OF_GRAVITY2D = Physics2D.gravity.magnitude;
         if (collision.CompareTag("Player"))
         {
-            Physics.gravity = new Vector3(Mathf.Cos(rot * Mathf.Deg2Rad), Mathf.Sin(rot * Mathf.Deg2Rad), 0) * FORCE_OF_GRAVITY;
-            Physics2D.gravity = new Vector2(Mathf.Cos(rot * Mathf.Deg2Rad), Mathf.Sin(rot * Mathf.Deg2Rad)) * FORCE_OF_GRAVITY2D;
+            Physics.gravity = new Vector3(Mathf.Cos(rot), Mathf.Sin(rot), 0) * FORCE_OF_GRAVITY;
+            Physics2D.gravity = new Vector2(Mathf.Cos(rot), Mathf.Sin(rot)) * FORCE_OF_GRAVITY2D;
             /*switch (rot)
             {
                 case 0: Physics.gravity = new Vector3(FORCE_OF_GRAVITY, 0, 0); Physics2D.gravity = new Vector2(FORCE_OF_GRAVITY2D, 0);  break;
