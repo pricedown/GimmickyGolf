@@ -6,6 +6,7 @@ using UnityEngine;
 public class GravBlock : MonoBehaviour
 {
     private float rot = 0;
+    public float magnitude = 1f;
 
     private void Start()
     {
@@ -15,8 +16,8 @@ public class GravBlock : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var FORCE_OF_GRAVITY = Physics.gravity.magnitude;
-        var FORCE_OF_GRAVITY2D = Physics2D.gravity.magnitude;
+        var FORCE_OF_GRAVITY = Physics.gravity.magnitude * magnitude;
+        var FORCE_OF_GRAVITY2D = Physics2D.gravity.magnitude * magnitude;
         if (collision.CompareTag("Player"))
         {
             Physics.gravity = new Vector3(Mathf.Cos(rot), Mathf.Sin(rot), 0) * FORCE_OF_GRAVITY;
