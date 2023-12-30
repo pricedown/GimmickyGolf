@@ -237,35 +237,41 @@ public class BallMovement : MonoBehaviour
 
         Vector3 velocity = initialVelocity;
         points.Add(transform.position);
+
+        Vector3 currentGrav = Physics.gravity;
         
+        const int margin = 2; // prevents the trail from ending too suddenly
         for (int i = 0; i < trajectoryIndicator.positionCount; i++)
         {
             Vector3 lastPoint = points.Last();
             
             // calculate velocity from accelerations and time
-            velocity += Physics.gravity * (rb.gravityScale * Time.fixedDeltaTime);  // gravity
+            velocity += currentGrav * (rb.gravityScale * Time.fixedDeltaTime);  // gravity
             velocity = velocity * Mathf.Clamp01(1f - rb.drag * Time.fixedDeltaTime); // drag
-            // calculate position from velocities
+            // calculate position from velocity
             Vector3 newPoint = lastPoint + (velocity * Time.fixedDeltaTime);
 
             points.Add(newPoint);
-
-            const int margin = 2;
-            if (i + margin >= trajectoryIndicator.positionCount)
+            
+            // don't compare collisions when margin reached 
+            if ((i + margin) >= trajectoryIndicator.positionCount)
                 continue;
             
-            // ?only check if it's a certain distance away
-            if (Vector3.Distance(transform.position, newPoint) > 2*collider.radius)
+            // don't compare collisions if it's within certain distance
+            if (Vector3.Distance(transform.position, newPoint) <= 2 * collider.radius)
+                continue;
+            
+            // TODO: implement a filter for triggers in OverlapCircleAll?
+            
+            Collider2D[] obstacles = Physics2D.OverlapCircleAll(newPoint, collider.radius);
+            foreach (Collider2D obstacle in obstacles)
             {
-                /*
-                if (Physics2D.OverlapCircle(newPoint, collider.radius - 0.3f))
-                {
-                    trajectoryIndicator.positionCount = i+margin;
-                }*/
-                // TODO: add filter for triggers in OverlapArea
-                
-                if (Physics2D.OverlapCircle(newPoint, collider.radius))
-                    trajectoryIndicator.positionCount = i+margin;
+                // if it's a gravblock, ignore collision and change the simultion gravity
+                GravBlock gravComponent = obstacle.gameObject.GetComponent<GravBlock>();
+                if (gravComponent) 
+                    currentGrav = gravComponent.getResultingGravity();
+                else 
+                    trajectoryIndicator.positionCount = i + margin;
             }
         }
         return points.ToArray();
