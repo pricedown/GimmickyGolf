@@ -56,7 +56,7 @@ public class BallMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        collider = GetComponent<CircleCollider2D>();
+        collider = GetComponent<CircleCollider2D>(); // Is this the same as Component.collider?
         cam = Camera.main;
         pullbackIndicator = GameObject.Find("Pullback").GetComponent<LineRenderer>();
         trajectoryIndicator = GameObject.Find("Trajectory").GetComponent<LineRenderer>();

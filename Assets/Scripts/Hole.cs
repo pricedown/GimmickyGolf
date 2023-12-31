@@ -8,7 +8,6 @@ public class Hole : MonoBehaviour
 {
     public float timeDiff;
     private float storedTime;
-    private bool hasCompleted = false;
     private bool flagRising = false;
     private Vector3 startLocation;
     private GameObject player;
