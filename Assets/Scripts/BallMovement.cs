@@ -51,6 +51,8 @@ public class BallMovement : MonoBehaviour
     private float lastMoved;
     private float lastParticle;
 
+    private LevelManager? levelman = LevelManager.instance;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -62,7 +64,8 @@ public class BallMovement : MonoBehaviour
         initialPos = transform.position;
         lastParticle = Time.time - 0.5f;
         ChangeStrokes(0);
-        LevelManager.instance.LoadPlayer();
+        if (levelman)
+            levelman.LoadPlayer();
         ResetGravity();
     }
 
@@ -203,7 +206,8 @@ public class BallMovement : MonoBehaviour
         if(context.performed)
         {
             Cancel(context);
-            LevelManager.instance.PauseUnpause();
+            if (levelman)
+                levelman.PauseUnpause();
         }
     }
     
@@ -315,7 +319,8 @@ public class BallMovement : MonoBehaviour
         if (Time.timeScale != 0)
         {
             strokeCount += changeBy;
-            LevelManager.instance.SetCurrentStrokes(strokeCount);
+            if (levelman)
+                levelman.SetCurrentStrokes(strokeCount);
         }
     }
     public void ResetGravity()
